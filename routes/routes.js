@@ -39,6 +39,7 @@ router.post('/form1', function(req, res, next) {
   req.checkBody('primaryEmail', 'Email must not be empty').notEmpty();
 
   var errors = req.validationErrors();
+
   if (errors) {
       console.log(errors);
       res.render('form1', {
@@ -62,7 +63,9 @@ router.post('/form1', function(req, res, next) {
           primaryFirstName: req.body.primaryFirstName,
           primaryMiddleName: req.body.primaryMiddleName,
           primaryLastName: req.body.primaryLastName,
+          primaryGender: req.body.primaryGender,
           primaryTin: req.body.primaryTin,
+          primarySSS: req.body.primarySSS,
           primaryDateOfBirth: req.body.primaryDateOfBirth,
           primaryCivilStatus: req.body.primaryCivilStatus,
           primaryNumberAndStreet: req.body.primaryNumberAndStreet,
@@ -72,11 +75,12 @@ router.post('/form1', function(req, res, next) {
           primaryTownAndDistrict: req.body.primaryTownAndDistrict,
           primaryContact: req.body.primaryContact,
           primaryEmail: req.body.primaryEmail,
-      }).save((err, resp) => {
+      }).save((err, user) => {
           if (err) {
               console.log("Oh no, error in saving user:", err);
           } else {
-              console.log("User successfully saved:", resp);
+              console.log("User successfully saved:", user);
+              localStorage.setItem('userId', user._id)
               res.redirect('/verify');
           }
       })
@@ -93,8 +97,8 @@ router.get('/form3', function(req, res, next) {
 
 
 router.get('/verify', function(req, res, next) {
-    var tempId = "599bcaf58b15a212afd40187";
-    User.findById(tempId)
+    var id = localStorage.getItem('userId');
+    User.findById(id)
     .exec((err, user) => {
           if (err) {
               console.log('Error in finding user', err)
@@ -111,8 +115,8 @@ router.get('/verify', function(req, res, next) {
 })
 
 router.post('/verify', function(req, res, next) {
-  var tempId = "599bcaf58b15a212afd40187";
-  User.findById(tempId)
+  var id = localStorage.getItem('userId');
+  User.findById(id)
   .exec((err, user) => {
         if (err) {
             console.log('Error in finding user', err)
