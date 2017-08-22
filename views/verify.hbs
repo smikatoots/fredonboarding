@@ -1,0 +1,35 @@
+<link rel='stylesheet' href='/stylesheets/form1.css' />
+
+<script>
+window.onload = () => {
+    $(document).ready(() => {
+        $("#verify-submit").on("click", (event) => {
+            event.preventDefault();
+            $.ajax({
+                url: '/verify',
+                method: 'POST',
+                success: function(res) {
+                    console.log("Success!");
+                },
+                error: function(err) {
+                    console.log("Error! ", err);
+                    return "Error!"
+                }
+            })
+        })
+    })
+}
+</script>
+
+<!-- <div id="form1"> -->
+<div id="all">
+    <h3>
+        Is all this information correct?
+    </h3>
+    {{# each user}}
+        <div>{{primaryFirstName}}, {{primaryMiddleName}}, {{primaryLastName}}</div>
+        <div>{{primaryEmail}}</div>
+    {{/each}}
+    <button id="verify-submit">Send email</button>
+</div>
+<!-- </div> -->

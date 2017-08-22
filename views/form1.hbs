@@ -1,0 +1,203 @@
+<link rel='stylesheet' href='/stylesheets/form1.css' />
+
+<script>
+window.onload = () => {
+    $(document).ready(() => {
+    })
+}
+</script>
+
+<div id="all">
+    {{#if error}}
+        {{#each error}}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{msg}}
+            </div>
+        {{/each}}
+    {{/if}}
+    <h3>Primary Account Holder Information</h3>
+    <form action="/form1" method="post" id="form1">
+        <table id="table1">
+          <tr>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Mikaela Helene" value="{{primaryFirstName}}" name="primaryFirstName" type="text" id="primaryFirstName" class="form-control">
+                    <label for="primaryFirstName">First Name</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Ocampo" value="{{primaryMiddleName}}" name="primaryMiddleName" type="text" id="primaryMiddleName" class="form-control">
+                    <label for="primaryMiddleName">Middle Name</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Reyes" value="{{primaryLastName}}" name="primaryLastName" type="text" id="primaryLastName" class="form-control">
+                    <label for="primaryLastName">Last Name</label>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="123 456 789" value="{{tin}}" name="primaryTin" type="text" id="primaryTin" class="form-control">
+                    <label for="primaryTin">TIN No.</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="123 456 789" value="{{primarySSS}}" name="primarySSS" type="text" id="primarySSS" class="form-control">
+                    <label for="primarySSS">GSIS/SSS</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="12/06/1994" value="{{primaryDateOfBirth}}" name="primaryDateOfBirth" type="text" id="primaryDateOfBirth" class="form-control">
+                    <label for="primaryDateOfBirth">Date of Birth</label>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="form-input">
+                <div class="radio-options">
+                    <div class="radio-label">Gender: </div>
+                    <div class="form-group radio-items">
+                        <input name="primaryGender" type="radio" id="male" checked="checked">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="form-group radio-items">
+                        <input name="primaryGender" type="radio" id="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="form-group radio-items">
+                        <input name="primaryGender" type="radio" id="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Single" value="{{primaryCivilStatus}}" name="primaryCivilStatus" type="text" id="primaryCivilStatus" class="form-control">
+                    <label for="primaryCivilStatus">Civil Status</label>
+                </div>
+            </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primaryNumberAndStreet" value="{{primaryNumberAndStreet}}" name="primaryNumberAndStreet" type="text" id="primaryNumberAndStreet" class="form-control">
+                      <label for="primaryNumberAndStreet">Number and Street</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primarySubdivision" value="{{primarySubdivision}}" name="primarySubdivision" type="text" id="primarySubdivision" class="form-control">
+                      <label for="primarySubdivision">Building / Subdivision</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primaryCityAndProvince" value="{{primaryCityAndProvince}}" name="primaryCityAndProvince" type="text" id="primaryCityAndProvince" class="form-control">
+                      <label for="primaryCityAndProvince">City and Province</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primaryZipcode" value="{{primaryZipcode}}" name="primaryZipcode" type="text" id="primaryZipcode" class="form-control">
+                      <label for="primaryZipcode">Postal / Zip Code</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2"class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primaryTownAndDistrict" value="{{primaryTownAndDistrict}}" name="primaryTownAndDistrict" type="text" id="primaryTownAndDistrict" class="form-control">
+                      <label for="primaryTownAndDistrict">Town and District</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Birth: </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryBirthCountry" type="radio" id="birthCountryPH" checked="checked">
+                          <label for="birthCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryGender" type="radio" id="birthCountryUSA">
+                          <label for="birthCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryGender" type="radio" id="birthCountryOther">
+                          <label for="birthCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Residency: </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryResidenceCountry" type="radio" id="residenceCountryPH" checked="checked">
+                          <label for="residenceCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryResidenceCountry" type="radio" id="residenceCountryUSA">
+                          <label for="residenceCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryResidenceCountry" type="radio" id="residenceCountryOther">
+                          <label for="residenceCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Citizenship: </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryCitizenshipCountry" type="radio" id="citizenshipCountryPH" checked="checked">
+                          <label for="citizenshipCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryCitizenshipCountry" type="radio" id="citizenshipCountryUSA">
+                          <label for="citizenshipCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          <input name="primaryCitizenshipCountry" type="radio" id="citizenshipCountryOther">
+                          <label for="citizenshipCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primaryContact" value="{{primaryContact}}" name="primaryContact" type="text" id="primaryContact" class="form-control">
+                      <label for="primaryContact">Contact Number</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="primaryEmail" value="{{primaryEmail}}" name="primaryEmail" type="text" id="primaryEmail" class="form-control">
+                      <label for="primaryEmail">Email</label>
+                  </div>
+              </td>
+          </tr>
+        </table>
+        <input type="submit" id="form1-submit" value="Submit">
+    </form>
+</div>
