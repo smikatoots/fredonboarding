@@ -3,6 +3,9 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 var UsersSchema = schema({
+    sessionID: {
+        type: String
+    },
     primaryFirstName: {
         type: String
     },

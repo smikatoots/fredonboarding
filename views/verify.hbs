@@ -9,7 +9,9 @@ window.onload = () => {
                 url: '/verify',
                 method: 'POST',
                 success: function(res) {
-                    console.log("Success!");
+                    $("#all").html("<div> Please check your email for further instructions!</div>")
+                    console.log(res);
+                    console.log("Success from verify post route!");
                 },
                 error: function(err) {
                     console.log("Error! ", err);
@@ -26,10 +28,8 @@ window.onload = () => {
     <h3>
         Is all this information correct?
     </h3>
-    {{# each user}}
-        <div>{{primaryFirstName}}, {{primaryMiddleName}}, {{primaryLastName}}</div>
-        <div>{{primaryEmail}}</div>
-    {{/each}}
-    <button id="verify-submit">Send email</button>
+    <div>{{user.primaryFirstName}} {{user.primaryMiddleName}} {{user.primaryLastName}}</div>
+    <div>{{user.primaryEmail}}</div>
+    <button type="button" id="verify-submit">Send email</button>
 </div>
 <!-- </div> -->

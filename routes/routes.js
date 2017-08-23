@@ -39,7 +39,7 @@ router.post('/form1', function(req, res, next) {
   req.checkBody('primaryEmail', 'Email must not be empty').notEmpty();
 
   var errors = req.validationErrors();
-
+  var sessionID = req.sessionID;
   if (errors) {
       console.log(errors);
       res.render('form1', {
@@ -60,6 +60,7 @@ router.post('/form1', function(req, res, next) {
       });
   } else {
       new User({
+          sessionID: sessionID,
           primaryFirstName: req.body.primaryFirstName,
           primaryMiddleName: req.body.primaryMiddleName,
           primaryLastName: req.body.primaryLastName,
@@ -80,7 +81,6 @@ router.post('/form1', function(req, res, next) {
               console.log("Oh no, error in saving user:", err);
           } else {
               console.log("User successfully saved:", user);
-              localStorage.setItem('userId', user._id)
               res.redirect('/verify');
           }
       })
@@ -91,14 +91,24 @@ router.get('/form2', function(req, res, next) {
   res.render('form2');
 });
 
+router.post('/confirm', function(req, res, next) {
+    res.redirect('/confirm')
+})
+
+router.get('/confirm', function(req, res, next) {
+    res.render('form3')
+})
+
 router.get('/form3', function(req, res, next) {
   res.render('form3');
 });
 
 
 router.get('/verify', function(req, res, next) {
-    var id = localStorage.getItem('userId');
-    User.findById(id)
+    console.log(req.session);
+    console.log(req.sessionID);
+    var sessionID = req.sessionID;
+    User.findOne({sessionID: sessionID})
     .exec((err, user) => {
           if (err) {
               console.log('Error in finding user', err)
@@ -108,6 +118,7 @@ router.get('/verify', function(req, res, next) {
           }
     })
     .then((user) => {
+        console.log('USERS', user);
         res.render('verify', {
             user
         })
@@ -115,8 +126,8 @@ router.get('/verify', function(req, res, next) {
 })
 
 router.post('/verify', function(req, res, next) {
-  var id = localStorage.getItem('userId');
-  User.findById(id)
+  var sessionID = req.sessionID;
+  User.findOne({sessionID: sessionID})
   .exec((err, user) => {
         if (err) {
             console.log('Error in finding user', err)
@@ -126,8 +137,7 @@ router.post('/verify', function(req, res, next) {
         }
   })
   .then((user) => {
-        console.log('User found', tempId, user);
-        var string = 'This is test user data: ' + user.primaryFirstName + user.primaryLastName + user.primaryEmail;
+        var string = 'This is test user data: ' + user.primaryFirstName + user.primaryMiddleName + user.primaryLastName + user.primaryEmail;
         var doc = new pdf();
         var buffers = [];
         doc.on('data', buffers.push.bind(buffers));
@@ -160,6 +170,7 @@ router.post('/verify', function(req, res, next) {
         doc.end();
         res.redirect('/form3');
     })
+
 });
 
 module.exports = router;
