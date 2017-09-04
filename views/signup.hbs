@@ -1,0 +1,29 @@
+<link rel='stylesheet' href='/stylesheets/register.css' />
+
+<div class="pt30 pb40 container">
+  {{#if error}}
+      {{#each error}}
+          <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{msg}}
+          </div>
+      {{/each}}
+  {{/if}}
+  <h3>Register</h3>
+  <form id="register-form" method="POST">
+    <div>
+      <input placeholder="Email" type="text" name="username">
+    </div>
+    <div>
+      <input placeholder="Password" type="password" name="password">
+    </div>
+    <div>
+      <input placeholder="Repeat Password" type="password" name="passwordRepeat">
+    </div>
+    <div>
+      <button id="register-button" type="submit">REGISTER</button>
+    </div>
+  </form>
+  <a id="login-link" href="/login">Already have an account? Login.</a>
+</div>

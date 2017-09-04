@@ -23,19 +23,19 @@ window.onload = () => {
           <tr>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="Mikaela Helene" value="{{primaryFirstName}}" name="primaryFirstName" type="text" id="primaryFirstName" class="form-control">
+                    <input placeholder="Jojo Jayjay" value="{{info.primaryFirstName}}" name="primaryFirstName" type="text" id="primaryFirstName" class="form-control">
                     <label for="primaryFirstName">First Name</label>
                 </div>
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="Ocampo" value="{{primaryMiddleName}}" name="primaryMiddleName" type="text" id="primaryMiddleName" class="form-control">
+                    <input placeholder="Coolguy" value="{{info.primaryMiddleName}}" name="primaryMiddleName" type="text" id="primaryMiddleName" class="form-control">
                     <label for="primaryMiddleName">Middle Name</label>
                 </div>
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="Reyes" value="{{primaryLastName}}" name="primaryLastName" type="text" id="primaryLastName" class="form-control">
+                    <input placeholder="Brown" value="{{info.primaryLastName}}" name="primaryLastName" type="text" id="primaryLastName" class="form-control">
                     <label for="primaryLastName">Last Name</label>
                 </div>
             </td>
@@ -43,19 +43,19 @@ window.onload = () => {
           <tr>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="123 456 789" value="{{primaryTin}}" name="primaryTin" type="text" id="primaryTin" class="form-control">
+                    <input placeholder="123 456 789" value="{{info.primaryTin}}" name="primaryTin" type="text" id="primaryTin" class="form-control">
                     <label for="primaryTin">TIN No.</label>
                 </div>
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="123 456 789" value="{{primarySSS}}" name="primarySSS" type="text" id="primarySSS" class="form-control">
+                    <input placeholder="123 456 789" value="{{info.primarySSS}}" name="primarySSS" type="text" id="primarySSS" class="form-control">
                     <label for="primarySSS">GSIS/SSS</label>
                 </div>
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="12/06/1994" value="{{primaryDateOfBirth}}" name="primaryDateOfBirth" type="text" id="primaryDateOfBirth" class="form-control">
+                    <input placeholder="12/06/1994" value="{{info.primaryDateOfBirth}}" name="primaryDateOfBirth" type="text" id="primaryDateOfBirth" class="form-control">
                     <label for="primaryDateOfBirth">Date of Birth</label>
                 </div>
             </td>
@@ -65,22 +65,34 @@ window.onload = () => {
                 <div class="radio-options">
                     <div class="radio-label">Gender: </div>
                     <div class="form-group radio-items">
-                        <input name="primaryGender" type="radio" id="male" checked="checked">
+                        {{#if radio.male}}
+                        <input name="primaryGender" type="radio" id="male" value="male" checked="checked">
+                        {{else}}
+                        <input name="primaryGender" type="radio" id="male" value="male">
+                        {{/if}}
                         <label for="male">Male</label>
                     </div>
                     <div class="form-group radio-items">
-                        <input name="primaryGender" type="radio" id="female">
+                        {{#if radio.female}}
+                        <input name="primaryGender" type="radio" id="female" value="female" checked="checked">
+                        {{else}}
+                        <input name="primaryGender" type="radio" id="female" value="female">
+                        {{/if}}
                         <label for="female">Female</label>
                     </div>
                     <div class="form-group radio-items">
-                        <input name="primaryGender" type="radio" id="other">
+                        {{#if radio.other}}
+                        <input name="primaryGender" type="radio" id="other" value="other" checked="checked">
+                        {{else}}
+                        <input name="primaryGender" type="radio" id="other" value="other">
+                        {{/if}}
                         <label for="other">Other</label>
                     </div>
                 </div>
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="Single" value="{{primaryCivilStatus}}" name="primaryCivilStatus" type="text" id="primaryCivilStatus" class="form-control">
+                    <input placeholder="Single and Sexy" value="{{info.primaryCivilStatus}}" name="primaryCivilStatus" type="text" id="primaryCivilStatus" class="form-control">
                     <label for="primaryCivilStatus">Civil Status</label>
                 </div>
             </td>
@@ -88,13 +100,13 @@ window.onload = () => {
           <tr>
               <td class="form-input">
                   <div class="md-form">
-                      <input placeholder="primaryNumberAndStreet" value="{{primaryNumberAndStreet}}" name="primaryNumberAndStreet" type="text" id="primaryNumberAndStreet" class="form-control">
+                      <input placeholder="123ABC" value="{{info.primaryNumberAndStreet}}" name="primaryNumberAndStreet" type="text" id="primaryNumberAndStreet" class="form-control">
                       <label for="primaryNumberAndStreet">Number and Street</label>
                   </div>
               </td>
               <td colspan="2" class="form-input">
                   <div class="md-form">
-                      <input placeholder="primarySubdivision" value="{{primarySubdivision}}" name="primarySubdivision" type="text" id="primarySubdivision" class="form-control">
+                      <input placeholder="My Mom's Office Building" value="{{info.primarySubdivision}}" name="primarySubdivision" type="text" id="primarySubdivision" class="form-control">
                       <label for="primarySubdivision">Building / Subdivision</label>
                   </div>
               </td>
@@ -102,13 +114,13 @@ window.onload = () => {
           <tr>
               <td colspan="2" class="form-input">
                   <div class="md-form">
-                      <input placeholder="primaryCityAndProvince" value="{{primaryCityAndProvince}}" name="primaryCityAndProvince" type="text" id="primaryCityAndProvince" class="form-control">
+                      <input placeholder="Quezon City" value="{{info.primaryCityAndProvince}}" name="primaryCityAndProvince" type="text" id="primaryCityAndProvince" class="form-control">
                       <label for="primaryCityAndProvince">City and Province</label>
                   </div>
               </td>
               <td class="form-input">
                   <div class="md-form">
-                      <input placeholder="primaryZipcode" value="{{primaryZipcode}}" name="primaryZipcode" type="text" id="primaryZipcode" class="form-control">
+                      <input placeholder="123456" value="{{info.primaryZipcode}}" name="primaryZipcode" type="text" id="primaryZipcode" class="form-control">
                       <label for="primaryZipcode">Postal / Zip Code</label>
                   </div>
               </td>
@@ -116,7 +128,7 @@ window.onload = () => {
           <tr>
               <td colspan="2"class="form-input">
                   <div class="md-form">
-                      <input placeholder="primaryTownAndDistrict" value="{{primaryTownAndDistrict}}" name="primaryTownAndDistrict" type="text" id="primaryTownAndDistrict" class="form-control">
+                      <input placeholder="Downtown" value="{{info.primaryTownAndDistrict}}" name="primaryTownAndDistrict" type="text" id="primaryTownAndDistrict" class="form-control">
                       <label for="primaryTownAndDistrict">Town and District</label>
                   </div>
               </td>
@@ -128,15 +140,27 @@ window.onload = () => {
                   <div class="radio-options">
                       <div class="radio-label">Country of Birth: </div>
                       <div class="form-group radio-items">
-                          <input name="primaryBirthCountry" type="radio" id="birthCountryPH" checked="checked">
+                          {{#if radio.birthCountryPH}}
+                          <input name="primaryBirthCountry" type="radio" value="birthCountryPH" checked="checked">
+                          {{else}}
+                          <input name="primaryBirthCountry" type="radio" value="birthCountryPH">
+                          {{/if}}
                           <label for="birthCountryPH">Philippines</label>
                       </div>
                       <div class="form-group radio-items">
-                          <input name="primaryBirthCountry" type="radio" id="birthCountryUSA">
+                          {{#if radio.birthCountryUSA}}
+                          <input name="primaryBirthCountry" type="radio" value="birthCountryUSA" checked="checked">
+                          {{else}}
+                          <input name="primaryBirthCountry" type="radio" value="birthCountryUSA">
+                          {{/if}}
                           <label for="birthCountryUSA">USA</label>
                       </div>
                       <div class="form-group radio-items">
-                          <input name="primaryBirthCountry" type="radio" id="birthCountryOther">
+                          {{#if radio.birthCountryOther}}
+                          <input name="primaryBirthCountry" type="radio" value="birthCountryOther" checked="checked">
+                          {{else}}
+                          <input name="primaryBirthCountry" type="radio" value="birthCountryOther">
+                          {{/if}}
                           <label for="birthCountryOther">Other</label>
                       </div>
                   </div>
@@ -148,15 +172,27 @@ window.onload = () => {
                   <div class="radio-options">
                       <div class="radio-label">Country of Residency: </div>
                       <div class="form-group radio-items">
-                          <input name="primaryResidenceCountry" type="radio" id="residenceCountryPH" checked="checked">
+                          {{#if radio.residenceCountryPH}}
+                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryPH" checked="checked">
+                          {{else}}
+                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryPH">
+                          {{/if}}
                           <label for="residenceCountryPH">Philippines</label>
                       </div>
                       <div class="form-group radio-items">
-                          <input name="primaryResidenceCountry" type="radio" id="residenceCountryUSA">
+                          {{#if radio.residenceCountryUSA}}
+                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryUSA" checked="checked">
+                          {{else}}
+                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryUSA">
+                          {{/if}}
                           <label for="residenceCountryUSA">USA</label>
                       </div>
                       <div class="form-group radio-items">
-                          <input name="primaryResidenceCountry" type="radio" id="residenceCountryOther">
+                          {{#if radio.residenceCountryOther}}
+                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryOther" checked="checked">
+                          {{else}}
+                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryOther">
+                          {{/if}}
                           <label for="residenceCountryOther">Other</label>
                       </div>
                   </div>
@@ -168,15 +204,27 @@ window.onload = () => {
                   <div class="radio-options">
                       <div class="radio-label">Country of Citizenship: </div>
                       <div class="form-group radio-items">
-                          <input name="primaryCitizenshipCountry" type="radio" id="citizenshipCountryPH" checked="checked">
+                          {{#if radio.citizenshipCountryPH}}
+                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryPH" checked="checked">
+                          {{else}}
+                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryPH">
+                          {{/if}}
                           <label for="citizenshipCountryPH">Philippines</label>
                       </div>
                       <div class="form-group radio-items">
-                          <input name="primaryCitizenshipCountry" type="radio" id="citizenshipCountryUSA">
+                          {{#if radio.citizenshipCountryUSA}}
+                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryUSA" checked="checked">
+                          {{else}}
+                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryUSA">
+                          {{/if}}
                           <label for="citizenshipCountryUSA">USA</label>
                       </div>
                       <div class="form-group radio-items">
-                          <input name="primaryCitizenshipCountry" type="radio" id="citizenshipCountryOther">
+                          {{#if radio.citizenshipCountryOther}}
+                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryOther" checked="checked">
+                          {{else}}
+                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryOther">
+                          {{/if}}
                           <label for="citizenshipCountryOther">Other</label>
                       </div>
                   </div>
@@ -186,15 +234,12 @@ window.onload = () => {
           <tr>
               <td class="form-input">
                   <div class="md-form">
-                      <input placeholder="primaryContact" value="{{primaryContact}}" name="primaryContact" type="text" id="primaryContact" class="form-control">
+                      <input placeholder="860 754 4996" value="{{info.primaryContact}}" name="primaryContact" type="text" id="primaryContact" class="form-control">
                       <label for="primaryContact">Contact Number</label>
                   </div>
               </td>
               <td colspan="2" class="form-input">
-                  <div class="md-form">
-                      <input placeholder="primaryEmail" value="{{primaryEmail}}" name="primaryEmail" type="text" id="primaryEmail" class="form-control">
-                      <label for="primaryEmail">Email</label>
-                  </div>
+                  Email: {{user.username}}
               </td>
           </tr>
         </table>

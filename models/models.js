@@ -3,7 +3,13 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 var UsersSchema = schema({
-    sessionID: {
+    username: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    password: {
         type: String
     },
     primaryFirstName: {
@@ -16,6 +22,12 @@ var UsersSchema = schema({
         type: String
     },
     primaryTin: {
+        type: String
+    },
+    primarySSS: {
+        type: String
+    },
+    primaryGender: {
         type: String
     },
     primaryDateOfBirth: {
@@ -42,7 +54,13 @@ var UsersSchema = schema({
     primaryContact: {
         type: String
     },
-    primaryEmail: {
+    primaryBirthCountry: {
+        type: String
+    },
+    primaryResidenceCountry: {
+        type: String
+    },
+    primaryCitizenshipCountry: {
         type: String
     },
 })

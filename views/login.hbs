@@ -1,0 +1,23 @@
+
+<link rel='stylesheet' href='/stylesheets/login.css' />
+<div class="container">
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  {{error}}
+</div>
+{{/if}}
+
+  <h3>Login</h3>
+  <form id="login-form" method="POST">
+    <div>
+      <input placeholder="Valid Email" type="text" name="username" class="">
+    </div>
+    <div>
+      <input placeholder="Password" type="password" name="password" class="">
+    </div>
+    <button id="login-button">LOGIN</button><br/>
+    <a id="register-link" href="/signup">Not yet signed up? Register.</a>
+  </form>
+</div>
