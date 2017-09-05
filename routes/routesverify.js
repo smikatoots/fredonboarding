@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/models');
+var pdf = require('pdfkit');
+var nodemailer = require('nodemailer');
+
 
 var User = models.User;
 var expressValidator = require('express-validator');
@@ -41,15 +44,25 @@ router.post('/verify', function(req, res, next) {
         }
   })
   .then((user) => {
-      var string = `${user.primaryFirstName} ${user.primaryMiddleName} ${user.primaryLastName} is cool. Yes or no?
-      Please email your answers to ${user.username}. Thanks, yo.`
+      var string = `<table id="results-table">
+        Full Name: ${user.primaryFirstName} ${user.primaryMiddleName} ${user.primaryLastName}
+        Tin #: ${user.primaryTin}
+        SSS #: ${user.primarySSS}
+        Gender: ${user.primaryGender}
+        Date of Birth: ${user.primaryDateOfBirth}
+        Civil Status: ${user.primaryCivilStatus}
+        Address: ${user.primaryNumberAndStreet} ${user.primarySubdivision} ${user.primaryCityAndProvince}, ${user.primaryZipcode} ${user.primaryTownAndDistrict}
+        Contact Number: ${user.primaryContact}
+        Country of Birth: ${user.primaryBirthCountry}
+        Country of Residence: ${user.primaryResidenceCountry}
+        Country of Citizenship: ${user.primaryCitizenshipCountry}`;
       var htmlMessage = `<h4>Hi ${user.primaryFirstName}!</h4>
       <p>Thank you for signing up for your COL Account.<br><br>
       Please do the following: <br>
       1) Save all your documents to your files. <br>
-      2) Print out the "[[DOCUMENT]]", print it and affix your signature in the appropriate fields. <br>
-      3) Scan that document and send it back to this freddiereyes@gmail.com <br>
-      We look forward to receiving your documents!</p><br>
+      2) Print out the "[insert name of document here]" and affix your signature in the appropriate fields. <br>
+      3) Scan that document and send it back to freddiereyes@gmail.com <br>><br>
+      We look forward to receiving your documents!</p
       <h4>Best, <br> Freddie Reyes</h4>`
       var doc = new pdf();
       var buffers = [];
@@ -59,12 +72,12 @@ router.post('/verify', function(req, res, next) {
           const mailTransport = nodemailer.createTransport({
               service: 'gmail',
               auth: {
-                 user: 'smikatoots@gmail.com',
-                 pass: 'newspaper'
+                 user: process.env.EMAIL,
+                 pass: process.env.PASS
               }
           });
           const mailOptions = {
-                from: 'smikatoots@gmail.com', // sender address
+                from: process.env.EMAIL, // sender address
                 to: user.username, // list of receivers
                 subject: 'This is a test email from the app!', // Subject line
                 html: htmlMessage, // plaintext body alt for html
@@ -82,6 +95,9 @@ router.post('/verify', function(req, res, next) {
       doc.text(string, 100, 100);
       doc.end();
       res.redirect('/form3');
+    })
+    .catch((err) => {
+        console.log(err);
     })
 
 });

@@ -92,8 +92,24 @@ window.onload = () => {
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    <input placeholder="Single and Sexy" value="{{info.primaryCivilStatus}}" name="primaryCivilStatus" type="text" id="primaryCivilStatus" class="form-control">
-                    <label for="primaryCivilStatus">Civil Status</label>
+                    Civil Status:
+                    <select name="primaryCivilStatus">
+                        {{#if radio.single}}
+                        <option value="single" selected>Single</option>
+                        {{else}}
+                        <option value="single">Single</option>
+                        {{/if}}
+                        {{#if radio.married}}
+                        <option value="married" selected>Married</option>
+                        {{else}}
+                        <option value="married">Married</option>
+                        {{/if}}
+                        {{#if radio.widowed}}
+                        <option value="widowed" selected>Widowed</option>
+                        {{else}}
+                        <option value="widowed">Widowed</option>
+                        {{/if}}
+                    </select>
                 </div>
             </td>
           </tr>
@@ -141,25 +157,25 @@ window.onload = () => {
                       <div class="radio-label">Country of Birth: </div>
                       <div class="form-group radio-items">
                           {{#if radio.birthCountryPH}}
-                          <input name="primaryBirthCountry" type="radio" value="birthCountryPH" checked="checked">
+                          <input name="primaryBirthCountry" type="radio" value="Philippines" checked="checked">
                           {{else}}
-                          <input name="primaryBirthCountry" type="radio" value="birthCountryPH">
+                          <input name="primaryBirthCountry" type="radio" value="Philippines">
                           {{/if}}
                           <label for="birthCountryPH">Philippines</label>
                       </div>
                       <div class="form-group radio-items">
                           {{#if radio.birthCountryUSA}}
-                          <input name="primaryBirthCountry" type="radio" value="birthCountryUSA" checked="checked">
+                          <input name="primaryBirthCountry" type="radio" value="United States of America" checked="checked">
                           {{else}}
-                          <input name="primaryBirthCountry" type="radio" value="birthCountryUSA">
+                          <input name="primaryBirthCountry" type="radio" value="United States of America">
                           {{/if}}
                           <label for="birthCountryUSA">USA</label>
                       </div>
                       <div class="form-group radio-items">
                           {{#if radio.birthCountryOther}}
-                          <input name="primaryBirthCountry" type="radio" value="birthCountryOther" checked="checked">
+                          <input name="primaryBirthCountry" type="radio" value="Other" checked="checked">
                           {{else}}
-                          <input name="primaryBirthCountry" type="radio" value="birthCountryOther">
+                          <input name="primaryBirthCountry" type="radio" value="Other">
                           {{/if}}
                           <label for="birthCountryOther">Other</label>
                       </div>
@@ -173,25 +189,25 @@ window.onload = () => {
                       <div class="radio-label">Country of Residency: </div>
                       <div class="form-group radio-items">
                           {{#if radio.residenceCountryPH}}
-                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryPH" checked="checked">
+                          <input name="primaryResidenceCountry" type="radio" value="Philippines" checked="checked">
                           {{else}}
-                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryPH">
+                          <input name="primaryResidenceCountry" type="radio" value="Philippines">
                           {{/if}}
                           <label for="residenceCountryPH">Philippines</label>
                       </div>
                       <div class="form-group radio-items">
                           {{#if radio.residenceCountryUSA}}
-                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryUSA" checked="checked">
+                          <input name="primaryResidenceCountry" type="radio" value="United States of America" checked="checked">
                           {{else}}
-                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryUSA">
+                          <input name="primaryResidenceCountry" type="radio" value="United States of America">
                           {{/if}}
                           <label for="residenceCountryUSA">USA</label>
                       </div>
                       <div class="form-group radio-items">
                           {{#if radio.residenceCountryOther}}
-                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryOther" checked="checked">
+                          <input name="primaryResidenceCountry" type="radio" value="Other" checked="checked">
                           {{else}}
-                          <input name="primaryResidenceCountry" type="radio" value="residenceCountryOther">
+                          <input name="primaryResidenceCountry" type="radio" value="Other">
                           {{/if}}
                           <label for="residenceCountryOther">Other</label>
                       </div>
@@ -205,25 +221,25 @@ window.onload = () => {
                       <div class="radio-label">Country of Citizenship: </div>
                       <div class="form-group radio-items">
                           {{#if radio.citizenshipCountryPH}}
-                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryPH" checked="checked">
+                          <input name="primaryCitizenshipCountry" type="radio" value="Philippines" checked="checked">
                           {{else}}
-                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryPH">
+                          <input name="primaryCitizenshipCountry" type="radio" value="Philippines">
                           {{/if}}
                           <label for="citizenshipCountryPH">Philippines</label>
                       </div>
                       <div class="form-group radio-items">
                           {{#if radio.citizenshipCountryUSA}}
-                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryUSA" checked="checked">
+                          <input name="primaryCitizenshipCountry" type="radio" value="United States of America" checked="checked">
                           {{else}}
-                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryUSA">
+                          <input name="primaryCitizenshipCountry" type="radio" value="United States of America">
                           {{/if}}
                           <label for="citizenshipCountryUSA">USA</label>
                       </div>
                       <div class="form-group radio-items">
                           {{#if radio.citizenshipCountryOther}}
-                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryOther" checked="checked">
+                          <input name="primaryCitizenshipCountry" type="radio" value="Other" checked="checked">
                           {{else}}
-                          <input name="primaryCitizenshipCountry" type="radio" value="citizenshipCountryOther">
+                          <input name="primaryCitizenshipCountry" type="radio" value="Other">
                           {{/if}}
                           <label for="citizenshipCountryOther">Other</label>
                       </div>

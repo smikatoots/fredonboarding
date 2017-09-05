@@ -1,4 +1,4 @@
-<link rel='stylesheet' href='/stylesheets/form1.css' />
+<link rel='stylesheet' href='/stylesheets/verify.css' />
 
 <script>
 window.onload = () => {
@@ -28,8 +28,55 @@ window.onload = () => {
     <h3>
         Is all this information correct?
     </h3>
-    <div>{{user.primaryFirstName}} {{user.primaryMiddleName}} {{user.primaryLastName}}</div>
-    <div>{{user.primaryEmail}}</div>
-    <button type="button" id="verify-submit">Send email</button>
+    <table id="results-table">
+      <tr>
+          <td class="result-label">Full Name</td>
+          <td class="result">{{user.primaryFirstName}} {{user.primaryMiddleName}} {{user.primaryLastName}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">TIN #</td>
+          <td class="result">{{user.primaryTin}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">SSS #</td>
+          <td class="result">{{user.primarySSS}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Gender #</td>
+          <td class="result">{{user.primaryGender}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Date of Birth</td>
+          <td class="result">{{user.primaryDateOfBirth}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Civil Status</td>
+          <td class="result">{{user.primaryCivilStatus}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Address</td>
+          <td class="result">{{user.primaryNumberAndStreet}} {{user.primarySubdivision}} {{user.primaryCityAndProvince}}, {{user.primaryZipcode}} {{user.primaryTownAndDistrict}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Contact Number</td>
+          <td class="result">{{user.primaryContact}}
+      </tr>
+      <tr>
+          <td class="result-label">Country of Birth</td>
+          <td class="result">{{user.primaryBirthCountry}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Country of Residence</td>
+          <td class="result">{{user.primaryResidenceCountry}}</td>
+      </tr>
+      <tr>
+          <td class="result-label">Country of Citizenship</td>
+          <td class="result">{{user.primaryCitizenshipCountry}}</td>
+      </tr>
+    </table>
+    <div id="button-holder">
+        <button class="verify-button" type="button" id="verify-edit"><a href="/form1">Edit</a></button>
+        <button class="verify-button" type="button" id="verify-submit">Send email</button>
+    </div>
 </div>
 <!-- </div> -->

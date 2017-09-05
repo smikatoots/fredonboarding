@@ -2,10 +2,8 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/models');
 var User = models.User;
-var pdf = require('pdfkit');
 var fs = require('fs');
 var blobStream = require('blob-stream');
-var nodemailer = require('nodemailer');
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 var apiKey = process.env.MAILGUN_API_KEY;
@@ -29,6 +27,8 @@ router.use(function(req, res, next){
     return next();
   }
 });
+
+// PRIVATE ROUTES
 
 var form1 = require('./routesform1.js')
 var verify = require('./routesverify.js')
