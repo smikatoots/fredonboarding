@@ -1,4 +1,3 @@
-// Add Passport-related auth routes here.
 var express = require('express');
 var router = express.Router();
 var models = require('../models/models');
@@ -25,7 +24,6 @@ module.exports = function(passport) {
         console.log("ERRORS", errors);
         return res.render('signup', {
             error: errors,
-            hello: [{hi:'Passwords do not match. Please try again.'}]
         })
     }
     if (req.body.password!==req.body.passwordRepeat) {
@@ -58,7 +56,7 @@ module.exports = function(passport) {
 
   // POST Login page
   router.post('/login', passport.authenticate('local',{
-    successRedirect: '/',
+    successRedirect: '/form1',
     failureRedirect: '/login'
   }));
 

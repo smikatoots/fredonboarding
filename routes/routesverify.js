@@ -27,7 +27,7 @@ router.get('/verify', function(req, res, next) {
     .then((user) => {
         console.log('USERS', user);
         res.render('verify', {
-            user
+            user: user
         })
     })
 })

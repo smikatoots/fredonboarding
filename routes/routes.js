@@ -17,7 +17,9 @@ router.use(bodyParser.json());
 router.use(expressValidator());
 
 router.get('/', function(req, res, next) {
-  res.render('home');
+  res.render('home', {
+      user: req.user
+  });
 });
 
 router.use(function(req, res, next){

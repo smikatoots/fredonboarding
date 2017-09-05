@@ -10,8 +10,6 @@ var LocalStrategy = require('passport-local');
 var bcrypt = require('bcrypt');
 
 var mongoose = require('mongoose');
-// var FacebookStrategy = require('passport-facebook');
-// var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
@@ -80,50 +78,6 @@ passport.use(new LocalStrategy(function(username, password, done) {
   });
 }
 ));
-
-//oauth stuff, google + facebook
-// passport.use(new FacebookStrategy({
-//   clientID: process.env.FB_CLIENT_ID,
-//   clientSecret: process.env.FB_CLIENT_SECRET,
-//   profileFields: ['id', 'displayName', 'photos'],
-//   callbackURL: process.env.NODE_ENV === 'production' ? process.env.DOMAIN + '/auth/facebook/callback' : "http://localhost:3000/auth/facebook/callback"
-// },
-// function(accessToken, refreshToken, profile, cb) {
-//   User.findOrCreate({ facebookId: profile.id }, {
-//     pictureURL: profile.photos[0].value,
-//     username: profile.displayName
-//   }, function (err, user) {
-//     if (err) {
-//       console.log('Problems with login')
-//     }
-//     else {
-//       console.log('FB logged in!')
-//       return cb(err, user);
-//     }
-//   });
-// }
-// ));
-
-// passport.use(new GoogleStrategy({
-//     clientID: process.env.GOOGLE_CLIENT_ID,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//     callbackURL: process.env.NODE_ENV === 'production' ? process.env.DOMAIN + '/auth/google/callback' : "http://localhost:3000/auth/google/callback"
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     User.findOrCreate({ googleId: profile.id }, {
-//       profile: profile,
-//       username: profile.name.givenName + ' ' + profile.name.familyName
-//     }, function (err, user) {
-//       if (err) {
-//         console.log('Problems with login', err)
-//       }
-//       else {
-//         console.log('google logged in!', profile)
-//         return cb(err, user);
-//       }
-//     });
-//   }
-// ));
 
 app.use('/', auth(passport));
 app.use('/', routes);
