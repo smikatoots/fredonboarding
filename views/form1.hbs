@@ -128,10 +128,16 @@ window.onload = () => {
               </td>
           </tr>
           <tr>
-              <td colspan="2" class="form-input">
+              <td class="form-input">
                   <div class="md-form">
-                      <input placeholder="Quezon City" value="{{info.primaryCityAndProvince}}" name="primaryCityAndProvince" type="text" id="primaryCityAndProvince" class="form-control">
-                      <label for="primaryCityAndProvince">City and Province</label>
+                      <input placeholder="Quezon City" value="{{info.primaryCity}}" name="primaryCity" type="text" id="primaryCity" class="form-control">
+                      <label for="primaryCity">City</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Metro Manila" value="{{info.primaryProvince}}" name="primaryProvince" type="text" id="primaryProvince" class="form-control">
+                      <label for="primaryProvince">Province</label>
                   </div>
               </td>
               <td class="form-input">

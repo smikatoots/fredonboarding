@@ -42,12 +42,12 @@ router.post('/form1', function(req, res, next) {
   req.checkBody('primaryFirstName', 'First name must not be empty').notEmpty();
   req.checkBody('primaryLastName', 'Last name must not be empty').notEmpty();
   req.checkBody('primaryTin', 'TIN # must not be empty').notEmpty();
-  req.checkBody('primarySSS', 'SSS # must not be empty').notEmpty();
   req.checkBody('primaryDateOfBirth', 'Date of birth must not be empty').notEmpty();
   req.checkBody('primaryCivilStatus', 'Civil status must not be empty').notEmpty();
   req.checkBody('primaryNumberAndStreet', 'Number and street address must not be empty').notEmpty();
   req.checkBody('primarySubdivision', 'Barangay and subdivision must not be empty').notEmpty();
-  req.checkBody('primaryCityAndProvince', 'City and province must not be empty').notEmpty();
+  req.checkBody('primaryCity', 'City must not be empty').notEmpty();
+  req.checkBody('primaryProvince', 'Province must not be empty').notEmpty();
   req.checkBody('primaryZipcode', 'Zipcode must not be empty').notEmpty();
   req.checkBody('primaryTownAndDistrict', 'Town and district must not be empty').notEmpty();
   req.checkBody('primaryContact', 'Contact number must not be empty').notEmpty();
@@ -64,7 +64,8 @@ router.post('/form1', function(req, res, next) {
       primaryCivilStatus: req.body.primaryCivilStatus,
       primaryNumberAndStreet: req.body.primaryNumberAndStreet,
       primarySubdivision: req.body.primarySubdivision,
-      primaryCityAndProvince: req.body.primaryCityAndProvince,
+      primaryCity: req.body.primaryCity,
+      primaryProvince: req.body.primaryProvince,
       primaryZipcode: req.body.primaryZipcode,
       primaryTownAndDistrict: req.body.primaryTownAndDistrict,
       primaryContact: req.body.primaryContact,

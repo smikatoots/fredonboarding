@@ -42,7 +42,10 @@ var UsersSchema = schema({
     primarySubdivision: {
         type: String
     },
-    primaryCityAndProvince: {
+    primaryCity: {
+        type: String
+    },
+    primaryProvince: {
         type: String
     },
     primaryZipcode: {
