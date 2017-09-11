@@ -3,6 +3,8 @@ var router = express.Router();
 var models = require('../models/models');
 var pdf = require('pdfkit');
 var nodemailer = require('nodemailer');
+var path = require('path');
+
 
 
 var User = models.User;
@@ -44,18 +46,6 @@ router.post('/verify', function(req, res, next) {
         }
   })
   .then((user) => {
-      var string = `<table id="results-table">
-        Full Name: ${user.primaryFirstName} ${user.primaryMiddleName} ${user.primaryLastName}
-        Tin #: ${user.primaryTin}
-        SSS #: ${user.primarySSS}
-        Gender: ${user.primaryGender}
-        Date of Birth: ${user.primaryDateOfBirth}
-        Civil Status: ${user.primaryCivilStatus}
-        Address: ${user.primaryNumberAndStreet} ${user.primarySubdivision} ${user.primaryCityAndProvince}, ${user.primaryZipcode} ${user.primaryTownAndDistrict}
-        Contact Number: ${user.primaryContact}
-        Country of Birth: ${user.primaryBirthCountry}
-        Country of Residence: ${user.primaryResidenceCountry}
-        Country of Citizenship: ${user.primaryCitizenshipCountry}`;
       var htmlMessage = `<h4>Hi ${user.primaryFirstName}!</h4>
       <p>Thank you for signing up for your COL Account.<br><br>
       Please do the following: <br>
@@ -91,8 +81,85 @@ router.post('/verify', function(req, res, next) {
           }).catch(error => {
               console.log('Error:', error);
           });
-      })
-      doc.text(string, 100, 100);
+      });
+
+      // Form Background
+      doc.image('public/images/form1-clean.png', 0, 0, {
+          width: 610
+      });
+
+      doc.fontSize(10);
+
+      var primaryBaseWidth = 140;
+      var secondaryBaseWidth = 368;
+      var nameHeight = 180;
+      var nameHeightIncrement = 20;
+
+      // primary names
+      doc.text(`${user.primaryLastName}`, primaryBaseWidth, nameHeight);
+      doc.text(`${user.primaryFirstName}`, primaryBaseWidth, nameHeight + (nameHeightIncrement*1));
+      doc.text(`${user.primaryMiddleName}`, primaryBaseWidth, nameHeight + (nameHeightIncrement*2));
+      // secondary names
+      doc.text(`secondary last name`, secondaryBaseWidth, nameHeight);
+      doc.text(`secondary first name`, secondaryBaseWidth, nameHeight + (nameHeightIncrement*1));
+      doc.text(`secondary middle name`, secondaryBaseWidth, nameHeight + (nameHeightIncrement*2));
+
+      var tinHeight = 221;
+      var tinHeightIncrement = 17;
+
+      // primary tin and beyond
+      doc.text(`${user.primaryTin}`, primaryBaseWidth, tinHeight + (tinHeightIncrement*1));
+      doc.text(`${user.primarySSS}`, primaryBaseWidth, tinHeight + (tinHeightIncrement*2));
+      doc.text(`${user.primaryGender}`, primaryBaseWidth, tinHeight + (tinHeightIncrement*3));
+      doc.text(`${user.primaryDateOfBirth}`, primaryBaseWidth + 100, tinHeight + (tinHeightIncrement*3));
+      doc.text(`${user.primaryBirthCountry}`, primaryBaseWidth, tinHeight + (tinHeightIncrement*4));
+      doc.text(`${user.primaryCitizenshipCountry}`, primaryBaseWidth, tinHeight + (tinHeightIncrement*5));
+      doc.text(`${user.primaryResidenceCountry}`, primaryBaseWidth, tinHeight + (tinHeightIncrement*6));
+
+      // secondary tin and beyond
+      doc.text(`${user.primaryTin}`, secondaryBaseWidth, tinHeight + (tinHeightIncrement*1));
+      doc.text(`${user.primarySSS}`, secondaryBaseWidth, tinHeight + (tinHeightIncrement*2));
+      doc.text(`${user.primaryGender}`, secondaryBaseWidth, tinHeight + (tinHeightIncrement*3));
+      doc.text(`${user.primaryDateOfBirth}`, secondaryBaseWidth + 100, tinHeight + (tinHeightIncrement*3));
+      doc.text(`${user.primaryBirthCountry}`, secondaryBaseWidth, tinHeight + (tinHeightIncrement*4));
+      doc.text(`${user.primaryCitizenshipCountry}`, secondaryBaseWidth, tinHeight + (tinHeightIncrement*5));
+      doc.text(`${user.primaryResidenceCountry}`, secondaryBaseWidth, tinHeight + (tinHeightIncrement*6));
+
+      var contactHeight = 320;
+      var contactHeightIncrement = 23;
+
+      // primary contact
+      doc.text(`Telephone: ${user.primaryContact}`, primaryBaseWidth, contactHeight + (contactHeightIncrement*1));
+      doc.text(`Mobile: ${user.primaryContact}`, primaryBaseWidth, contactHeight + (contactHeightIncrement*2));
+      doc.text(`${user.username}`, primaryBaseWidth, contactHeight + (contactHeightIncrement*3));
+
+      // secondary contact
+      doc.text(`Telephone: secondary phone`, secondaryBaseWidth, contactHeight + (contactHeightIncrement*1));
+      doc.text(`Mobile: secondary mobile`, secondaryBaseWidth, contactHeight + (contactHeightIncrement*2));
+      doc.text(`secondary email`, secondaryBaseWidth, contactHeight + (contactHeightIncrement*3));
+
+      var addressHeight = 398.5;
+      var addressHeightIncrement = 17;
+
+      // primary address
+      doc.text(`${user.primaryNumberAndStreet}`, primaryBaseWidth, addressHeight + (addressHeightIncrement*1));
+      doc.text(`${user.primarySubdivision}`, primaryBaseWidth + 80, addressHeight + (addressHeightIncrement*1));
+      doc.text(`${user.primaryCity}, ${user.primaryProvince}`, primaryBaseWidth, addressHeight + (addressHeightIncrement*2));
+      doc.text(`${user.primaryZipcode}`, primaryBaseWidth + 160, addressHeight + (addressHeightIncrement*2));
+      doc.text(`${user.primaryTownAndDistrict}`, primaryBaseWidth, addressHeight + (addressHeightIncrement*3));
+      doc.text(`${user.primaryResidenceCountry}`, primaryBaseWidth, addressHeight + (addressHeightIncrement*4));
+      doc.text(`${user.primaryCivilStatus}`, primaryBaseWidth, addressHeight + (addressHeightIncrement*5));
+
+      // secondary address
+      doc.text(`${user.primaryNumberAndStreet}`, secondaryBaseWidth, addressHeight + (addressHeightIncrement*1));
+      doc.text(`${user.primarySubdivision}`, secondaryBaseWidth + 80, addressHeight + (addressHeightIncrement*1));
+      doc.text(`${user.primaryCity}, ${user.primaryProvince}`, secondaryBaseWidth, addressHeight + (addressHeightIncrement*2));
+      doc.text(`${user.primaryZipcode}`, secondaryBaseWidth + 160, addressHeight + (addressHeightIncrement*2));
+      doc.text(`${user.primaryTownAndDistrict}`, secondaryBaseWidth, addressHeight + (addressHeightIncrement*3));
+      doc.text(`${user.primaryResidenceCountry}`, secondaryBaseWidth, addressHeight + (addressHeightIncrement*4));
+      doc.text(`${user.primaryCivilStatus}`, secondaryBaseWidth, addressHeight + (addressHeightIncrement*5));
+
+
       doc.end();
       res.redirect('/form3');
     })

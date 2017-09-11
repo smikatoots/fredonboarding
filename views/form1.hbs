@@ -60,7 +60,7 @@ window.onload = () => {
                 </div>
             </td>
           </tr>
-          <tr>
+          <tr class="special-tr">
             <td colspan="2" class="form-input">
                 <div class="radio-options">
                     <div class="radio-label">Gender: </div>
@@ -92,7 +92,7 @@ window.onload = () => {
             </td>
             <td class="form-input">
                 <div class="md-form">
-                    Civil Status:
+                    <div class="radio-label">Civil Status:</div>
                     <select name="primaryCivilStatus">
                         {{#if radio.single}}
                         <option value="single" selected>Single</option>
@@ -112,6 +112,9 @@ window.onload = () => {
                     </select>
                 </div>
             </td>
+          </tr>
+          <tr><br>
+              <td class="form-input"></td>
           </tr>
           <tr>
               <td class="form-input">
@@ -157,8 +160,8 @@ window.onload = () => {
               <td colspan="2" class="form-input">
               </td>
           </tr>
-          <tr>
-              <td colspan="2" class="form-input">
+          <tr class="special-tr">
+              <td colspan="3" class="form-input">
                   <div class="radio-options">
                       <div class="radio-label">Country of Birth: </div>
                       <div class="form-group radio-items">
@@ -189,8 +192,8 @@ window.onload = () => {
               </td>
               <td></td>
           </tr>
-          <tr>
-              <td colspan="2" class="form-input">
+          <tr class="special-tr">
+              <td colspan="3" class="form-input">
                   <div class="radio-options">
                       <div class="radio-label">Country of Residency: </div>
                       <div class="form-group radio-items">
@@ -221,8 +224,8 @@ window.onload = () => {
               </td>
               <td></td>
           </tr>
-          <tr>
-              <td colspan="2" class="form-input">
+          <tr class="special-tr">
+              <td colspan="3" class="form-input">
                   <div class="radio-options">
                       <div class="radio-label">Country of Citizenship: </div>
                       <div class="form-group radio-items">
@@ -253,7 +256,7 @@ window.onload = () => {
               </td>
               <td></td>
           </tr>
-          <tr>
+          <tr class="special-tr">
               <td class="form-input">
                   <div class="md-form">
                       <input placeholder="860 754 4996" value="{{info.primaryContact}}" name="primaryContact" type="text" id="primaryContact" class="form-control">
@@ -261,8 +264,265 @@ window.onload = () => {
                   </div>
               </td>
               <td colspan="2" class="form-input">
-                  Email: {{user.username}}
+                  <div class="radio-label">Email:</div>{{user.username}}
               </td>
+          </tr>
+          <tr>
+              <td colspan="3" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.primaryOccupation}}" name="primaryOccupation" type="text" id="primaryOccupation" class="form-control">
+                      <label for="primaryOccupation">Occupation</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.primaryEmployer}}" name="primaryEmployer" type="text" id="primaryEmployer" class="form-control">
+                      <label for="primaryEmployer">Employer/Company</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="860 754 4996" value="{{info.primaryBusinessContact}}" name="primaryBusinessContact" type="text" id="primaryBusinessContact" class="form-control">
+                      <label for="primaryContact">Business Number</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <span class="radio-label">Status:</span>
+                  <select name="primaryEmploymentStatus">
+                      {{#if radio.employed}}
+                      <option value="Employed" selected>Employed</option>
+                      {{else}}
+                      <option value="Employed">Employed</option>
+                      {{/if}}
+                      {{#if radio.unemployed}}
+                      <option value="Unemployed" selected>Unemployed</option>
+                      {{else}}
+                      <option value="Unemployed">Unemployed</option>
+                      {{/if}}
+                      {{#if radio.ofw}}
+                      <option value="OFW" selected>OFW</option>
+                      {{else}}
+                      <option value="OFW">OFW</option>
+                      {{/if}}
+                      {{#if radio.selfemployed}}
+                      <option value="Self-Employed" selected>Self-Employed</option>
+                      {{else}}
+                      <option value="Self-Employed">Self-Employed</option>
+                      {{/if}}
+                      {{#if radio.student}}
+                      <option value="Student" selected>Student</option>
+                      {{else}}
+                      <option value="Student">Student</option>
+                      {{/if}}
+                      {{#if radio.retired}}
+                      <option value="Retired" selected>Retired</option>
+                      {{else}}
+                      <option value="Retired">Retired</option>
+                      {{/if}}
+                      {{#if radio.homemaker}}
+                      <option value="Homemaker" selected>Homemaker</option>
+                      {{else}}
+                      <option value="Homemaker">Homemaker</option>
+                      {{/if}}
+                      {{#if radio.otherEmployment}}
+                      <option value="Other" selected>Other</option>
+                      {{else}}
+                      <option value="Other">Other</option>
+                      {{/if}}
+                  </select>
+              </td>
+              <td class="form-input">
+                  <span class="radio-label">Business Type:</span>
+                  <select name="primaryNatureOfBusiness">
+                      {{#if radio.agriaqua}}
+                      <option value="Agri/Aqua" selected>Agri/Aqua</option>
+                      {{else}}
+                      <option value="Agri/Aqua">Agri/Aqua</option>
+                      {{/if}}
+                      {{#if radio.consultancy}}
+                      <option value="Consultancy" selected>Consultancy</option>
+                      {{else}}
+                      <option value="Consultancy">Consultancy</option>
+                      {{/if}}
+                      {{#if radio.entertainment}}
+                      <option value="Entertainment" selected>Entertainment</option>
+                      {{else}}
+                      <option value="Entertainment">Entertainment</option>
+                      {{/if}}
+                      {{#if radio.finance}}
+                      <option value="Finance" selected>Finance</option>
+                      {{else}}
+                      <option value="Finance">Finance</option>
+                      {{/if}}
+                      {{#if radio.gov}}
+                      <option value="Government Service" selected>Government Service</option>
+                      {{else}}
+                      <option value="Government Service">Government Service</option>
+                      {{/if}}
+                      {{#if radio.mining}}
+                      <option value="Mining" selected>Mining</option>
+                      {{else}}
+                      <option value="Mining">Mining</option>
+                      {{/if}}
+                      {{#if radio.transportation}}
+                      <option value="Transportation" selected>Transportation</option>
+                      {{else}}
+                      <option value="Transportation">Transportation</option>
+                      {{/if}}
+                      {{#if radio.communication}}
+                      <option value="Communication" selected>Communication</option>
+                      {{else}}
+                      <option value="Communication">Communication</option>
+                      {{/if}}
+                      {{#if radio.banking}}
+                      <option value="Banking" selected>Banking</option>
+                      {{else}}
+                      <option value="Banking">Banking</option>
+                      {{/if}}
+                      {{#if radio.brokerage}}
+                      <option value="Brokerage" selected>Brokerage</option>
+                      {{else}}
+                      <option value="Brokerage">Brokerage</option>
+                      {{/if}}
+                      {{#if radio.education}}
+                      <option value="Education" selected>Education</option>
+                      {{else}}
+                      <option value="Education">Education</option>
+                      {{/if}}
+                      {{#if radio.food}}
+                      <option value="Food" selected>Food</option>
+                      {{else}}
+                      <option value="Food">Food</option>
+                      {{/if}}
+                      {{#if radio.manufacturing}}
+                      <option value="Manufacturing" selected>Manufacturing</option>
+                      {{else}}
+                      <option value="Manufacturing">Manufacturing</option>
+                      {{/if}}
+                      {{#if radio.medical}}
+                      <option value="Medical" selected>Medical</option>
+                      {{else}}
+                      <option value="Medical">Medical</option>
+                      {{/if}}
+                      {{#if radio.wholesale}}
+                      <option value="Wholesale/Retail" selected>Wholesale/Retail</option>
+                      {{else}}
+                      <option value="Wholesale/Retail">Wholesale/Retail</option>
+                      {{/if}}
+                      {{#if radio.utilities}}
+                      <option value="Utilities" selected>Utilities</option>
+                      {{else}}
+                      <option value="Utilities">Utilities</option>
+                      {{/if}}
+                      {{#if radio.otherNature}}
+                      <option value="Other" selected>Other</option>
+                      {{else}}
+                      <option value="Other">Other</option>
+                      {{/if}}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">&nbsp;</td>
+          </tr>
+          <tr>
+              <td class="form-input">&nbsp;</td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.primaryBusinessNumberAndStreet}}" name="primaryBusinessNumberAndStreet" type="text" id="primaryBusinessNumberAndStreet" class="form-control">
+                      <label for="primaryBusinessNumberAndStreet">Number and Street</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="My Mom's Office Building" value="{{info.primaryBusinessSubdivision}}" name="primaryBusinessSubdivision" type="text" id="primaryBusinessSubdivision" class="form-control">
+                      <label for="primarySubdivision">Building / Subdivision</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Quezon City" value="{{info.primaryBusinessCity}}" name="primaryBusinessCity" type="text" id="primaryBusinessCity" class="form-control">
+                      <label for="primaryBusinessCity">City</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Metro Manila" value="{{info.primaryBusinessProvince}}" name="primaryBusinessProvince" type="text" id="primaryBusinessProvince" class="form-control">
+                      <label for="primaryBusinessProvince">Province</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123456" value="{{info.primaryBusinessZipcode}}" name="primaryBusinessZipcode" type="text" id="primaryBusinessZipcode" class="form-control">
+                      <label for="primaryBusinessZipcode">Postal / Zip Code</label>
+                  </div>
+              </td>
+          </tr>
+          <tr class="special-tr">
+              <td colspan="2"class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Downtown" value="{{info.primaryBusinessTownAndDistrict}}" name="primaryBusinessTownAndDistrict" type="text" id="primaryBusinessTownAndDistrict" class="form-control">
+                      <label for="primaryBusinessTownAndDistrict">Town and District</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="radio-label">Mail Preference:</div>
+                  <select name="primaryPreferredAddress">
+                      {{#if radio.home}}
+                      <option value="Home" selected>Home</option>
+                      {{else}}
+                      <option value="Home">Home</option>
+                      {{/if}}
+                      {{#if radio.business}}
+                      <option value="Business/Office" selected>Business/Office</option>
+                      {{else}}
+                      <option value="Business/Office">Business/Office</option>
+                      {{/if}}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Business: </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.businessCountryPH}}
+                          <input name="primaryBusinessCountry" type="radio" value="Philippines" checked="checked">
+                          {{else}}
+                          <input name="primaryBusinessCountry" type="radio" value="Philippines">
+                          {{/if}}
+                          <label for="businessCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.businessCountryUSA}}
+                          <input name="primaryBusinessCountry" type="radio" value="United States of America" checked="checked">
+                          {{else}}
+                          <input name="primaryBusinessCountry" type="radio" value="United States of America">
+                          {{/if}}
+                          <label for="businessCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.businessCountryOther}}
+                          <input name="primaryBusinessCountry" type="radio" value="Other" checked="checked">
+                          {{else}}
+                          <input name="primaryBusinessCountry" type="radio" value="Other">
+                          {{/if}}
+                          <label for="businessCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr>
+
           </tr>
         </table>
         <input type="submit" id="form1-submit" value="Submit">

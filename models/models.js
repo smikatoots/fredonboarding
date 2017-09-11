@@ -6,9 +6,6 @@ var UsersSchema = schema({
     username: {
         type: String
     },
-    email: {
-        type: String
-    },
     password: {
         type: String
     },
@@ -64,6 +61,45 @@ var UsersSchema = schema({
         type: String
     },
     primaryCitizenshipCountry: {
+        type: String
+    },
+    primaryOccupation: {
+        type: String
+    },
+    primaryEmploymentStatus: {
+        type: String
+    },
+    primaryEmployer: {
+        type: String
+    },
+    primaryNatureOfBusiness: {
+        type: String
+    },
+    primaryBusinessContact: {
+        type: String
+    },
+    primaryBusinessNumberAndStreet: {
+        type: String
+    },
+    primaryBusinessSubdivision: {
+        type: String
+    },
+    primaryBusinessCity: {
+        type: String
+    },
+    primaryBusinessProvince: {
+        type: String
+    },
+    primaryBusinessZipcode: {
+        type: String
+    },
+    primaryBusinessTownAndDistrict: {
+        type: String
+    },
+    primaryBusinessCountry: {
+        type: String
+    },
+    primaryPreferredAddress: {
         type: String
     },
 })

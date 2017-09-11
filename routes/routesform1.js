@@ -28,6 +28,35 @@ router.get('/form1', function(req, res, next) {
       citizenshipCountryPH: user.primaryCitizenshipCountry === 'Philippines',
       citizenshipCountryUSA: user.primaryCitizenshipCountry === 'United States of America',
       citizenshipCountryOther: user.primaryCitizenshipCountry === 'Other',
+      businessCountryPH: user.primaryBusinessCountry === 'Philippines',
+      businessCountryUSA: user.primaryBusinessCountry === 'United States of America',
+      businessCountryOther: user.primaryBusinessCountry === 'Other',
+      home: user.primaryPreferredAddress === 'Home',
+      business: user.primaryPreferredAddress === 'Business/Office',
+      employed: user.primaryEmploymentStatus === 'Employed',
+      unemployed: user.primaryEmploymentStatus === 'Unmployed',
+      ofw: user.primaryEmploymentStatus === 'OFW',
+      selfemployed: user.primaryEmploymentStatus === 'Self-Employed',
+      student: user.primaryEmploymentStatus === 'Student',
+      retired: user.primaryEmploymentStatus === 'Retired',
+      homemaker: user.primaryEmploymentStatus === 'Homemaker',
+      otherEmployment: user.primaryEmploymentStatus === 'Other',
+      agriaqua: user.primaryNatureOfBusiness === 'Agri/Aqua',
+      consultancy: user.primaryNatureOfBusiness === 'Consultancy',
+      entertainment: user.primaryNatureOfBusiness === 'Entertainment',
+      finance: user.primaryNatureOfBusiness === 'Finance',
+      gov: user.primaryNatureOfBusiness === 'Government Service',
+      mining: user.primaryNatureOfBusiness === 'Mining',
+      transcomm: user.primaryNatureOfBusiness === 'Transportation/Communication',
+      banking: user.primaryNatureOfBusiness === 'Banking',
+      brokerage: user.primaryNatureOfBusiness === 'Brokerage',
+      education: user.primaryNatureOfBusiness === 'Education',
+      food: user.primaryNatureOfBusiness === 'Food',
+      manufacturing: user.primaryNatureOfBusiness === 'Manufacturing',
+      medical: user.primaryNatureOfBusiness === 'Medical',
+      wholesale: user.primaryNatureOfBusiness === 'Wholesale/Retail',
+      utilities: user.primaryNatureOfBusiness === 'Utilities',
+      otherNature: user.primaryNatureOfBusiness === 'Other',
   };
   User.findById(user._id, (err, user) => {
       res.render('form1', {
@@ -51,6 +80,16 @@ router.post('/form1', function(req, res, next) {
   req.checkBody('primaryZipcode', 'Zipcode must not be empty').notEmpty();
   req.checkBody('primaryTownAndDistrict', 'Town and district must not be empty').notEmpty();
   req.checkBody('primaryContact', 'Contact number must not be empty').notEmpty();
+  req.checkBody('primaryOccupation', 'Occupation must not be empty').notEmpty();
+  req.checkBody('primaryEmployer', 'Employer must not be empty').notEmpty();
+  req.checkBody('primaryBusinessContact', 'Business contact number must not be empty').notEmpty();
+  req.checkBody('primaryBusinessNumberAndStreet', 'Business number and street address must not be empty').notEmpty();
+  req.checkBody('primaryBusinessSubdivision', 'Business subdivision must not be empty').notEmpty();
+  req.checkBody('primaryBusinessCity', 'Business city must not be empty').notEmpty();
+  req.checkBody('primaryBusinessProvince', 'Business province must not be empty').notEmpty();
+  req.checkBody('primaryBusinessZipcode', 'Business zipcode must not be empty').notEmpty();
+  req.checkBody('primaryBusinessTownAndDistrict', 'Business town and district must not be empty').notEmpty();
+
   var errors = req.validationErrors();
   var user = req.user;
   var infoObj = {
@@ -72,6 +111,19 @@ router.post('/form1', function(req, res, next) {
       primaryBirthCountry: req.body.primaryBirthCountry,
       primaryResidenceCountry: req.body.primaryResidenceCountry,
       primaryCitizenshipCountry: req.body.primaryCitizenshipCountry,
+      primaryOccupation: req.body.primaryOccupation,
+      primaryEmploymentStatus: req.body.primaryEmploymentStatus,
+      primaryEmployer: req.body.primaryEmployer,
+      primaryNatureOfBusiness: req.body.primaryNatureOfBusiness,
+      primaryBusinessContact: req.body.primaryBusinessContact,
+      primaryBusinessNumberAndStreet: req.body.primaryBusinessNumberAndStreet,
+      primaryBusinessSubdivision: req.body.primaryBusinessSubdivision,
+      primaryBusinessCity: req.body.primaryBusinessCity,
+      primaryBusinessProvince: req.body.primaryBusinessProvince,
+      primaryBusinessZipcode: req.body.primaryBusinessZipcode,
+      primaryBusinessTownAndDistrict: req.body.primaryBusinessTownAndDistrict,
+      primaryBusinessCountry: req.body.primaryBusinessCountry,
+      primaryPreferredAddress: req.body.primaryPreferredAddress,
   };
   var radioObj = {
       male: user.primaryGender === 'male',
@@ -89,6 +141,36 @@ router.post('/form1', function(req, res, next) {
       citizenshipCountryPH: user.primaryCitizenshipCountry === 'Philippines',
       citizenshipCountryUSA: user.primaryCitizenshipCountry === 'United States of America',
       citizenshipCountryOther: user.primaryCitizenshipCountry === 'Other',
+      businessCountryPH: user.primaryBusinessCountry === 'Philippines',
+      businessCountryUSA: user.primaryBusinessCountry === 'United States of America',
+      businessCountryOther: user.primaryBusinessCountry === 'Other',
+      home: user.primaryPreferredAddress === 'Home',
+      business: user.primaryPreferredAddress === 'Business/Office',
+      employed: user.primaryEmploymentStatus === 'Employed',
+      unemployed: user.primaryEmploymentStatus === 'Unmployed',
+      ofw: user.primaryEmploymentStatus === 'OFW',
+      selfemployed: user.primaryEmploymentStatus === 'Self-Employed',
+      student: user.primaryEmploymentStatus === 'Student',
+      retired: user.primaryEmploymentStatus === 'Retired',
+      homemaker: user.primaryEmploymentStatus === 'Homemaker',
+      otherEmployment: user.primaryEmploymentStatus === 'Other',
+      agriaqua: user.primaryNatureOfBusiness === 'Agri/Aqua',
+      consultancy: user.primaryNatureOfBusiness === 'Consultancy',
+      entertainment: user.primaryNatureOfBusiness === 'Entertainment',
+      finance: user.primaryNatureOfBusiness === 'Finance',
+      gov: user.primaryNatureOfBusiness === 'Government Service',
+      mining: user.primaryNatureOfBusiness === 'Mining',
+      transportation: user.primaryNatureOfBusiness === 'Transportation',
+      communication: user.primaryNatureOfBusiness === 'Commnication',
+      banking: user.primaryNatureOfBusiness === 'Banking',
+      brokerage: user.primaryNatureOfBusiness === 'Brokerage',
+      education: user.primaryNatureOfBusiness === 'Education',
+      food: user.primaryNatureOfBusiness === 'Food',
+      manufacturing: user.primaryNatureOfBusiness === 'Manufacturing',
+      medical: user.primaryNatureOfBusiness === 'Medical',
+      wholesale: user.primaryNatureOfBusiness === 'Wholesale/Retail',
+      utilities: user.primaryNatureOfBusiness === 'Utilities',
+      otherNature: user.primaryNatureOfBusiness === 'Other',
   };
   console.log('radio object', radioObj);
   if (errors) {
