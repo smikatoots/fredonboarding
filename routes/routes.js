@@ -33,14 +33,16 @@ router.use(function(req, res, next){
 // PRIVATE ROUTES
 
 var form1 = require('./routesform1.js')
+var form2 = require('./routesform2.js')
 var verify = require('./routesverify.js')
 
 router.use('/', form1);
+router.use('/', form2);
 router.use('/', verify);
 
-router.get('/form2', function(req, res, next) {
-  res.render('form2');
-});
+// router.get('/form2', function(req, res, next) {
+//   res.render('form2');
+// });
 
 router.get('/confirm', function(req, res, next) {
     res.render('/confirm')

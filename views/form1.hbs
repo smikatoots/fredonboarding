@@ -256,14 +256,22 @@ window.onload = () => {
               </td>
               <td></td>
           </tr>
-          <tr class="special-tr">
-              <td class="form-input">
+          <tr>
+              <td colspan="2" class="form-input">
                   <div class="md-form">
-                      <input placeholder="860 754 4996" value="{{info.primaryContact}}" name="primaryContact" type="text" id="primaryContact" class="form-control">
-                      <label for="primaryContact">Contact Number</label>
+                      <input placeholder="+(country code)(area code)(number); ex. +6329999999" value="{{info.primaryTelephone}}" name="primaryTelephone" type="text" id="primaryTelephone" class="form-control">
+                      <label for="primaryTelephone">Telephone Number</label>
                   </div>
               </td>
+          </tr>
+          <tr class="special-tr">
               <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="+(country code)(area code)(number); ex. +639179999999" value="{{info.primaryMobile}}" name="primaryMobile" type="text" id="primaryMobile" class="form-control">
+                      <label for="primaryMobile">Mobile Number</label>
+                  </div>
+              </td>
+              <td class="form-input">
                   <div class="radio-label">Email:</div>{{user.username}}
               </td>
           </tr>
@@ -282,9 +290,11 @@ window.onload = () => {
                       <label for="primaryEmployer">Employer/Company</label>
                   </div>
               </td>
-              <td class="form-input">
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
                   <div class="md-form">
-                      <input placeholder="860 754 4996" value="{{info.primaryBusinessContact}}" name="primaryBusinessContact" type="text" id="primaryBusinessContact" class="form-control">
+                      <input placeholder="+(country code) (area code) (number); ex. +639179999999" value="{{info.primaryBusinessContact}}" name="primaryBusinessContact" type="text" id="primaryBusinessContact" class="form-control">
                       <label for="primaryContact">Business Number</label>
                   </div>
               </td>
@@ -527,4 +537,5 @@ window.onload = () => {
         </table>
         <input type="submit" id="form1-submit" value="Submit">
     </form>
+    
 </div>

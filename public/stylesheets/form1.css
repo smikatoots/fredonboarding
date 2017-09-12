@@ -10,7 +10,7 @@ body {
     align-items: center;
 }
 
-#form1 {
+#form1, #form2 {
     /*background-color: grey;*/
     width: 60%;
     display: flex;
@@ -45,7 +45,7 @@ body {
     vertical-align: top;
 }
 
-#form1-submit {
+#form1-submit, #form2-submit-none, #form2-submit {
   width: 200px;
   font-size: 15px;
   font-weight: 900;
@@ -62,7 +62,7 @@ body {
   cursor: pointer;
   outline: none;
 }
-#form1-submit:hover {
+#form1-submit:hover, #form2-submit-none:hover, #form2-submit:hover {
   background-color: #09519C;
   box-shadow: 0px 15px 20px rgba(192, 192, 192, 0.4);
   color: #fff;

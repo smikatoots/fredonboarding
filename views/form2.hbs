@@ -1,84 +1,543 @@
 <link rel='stylesheet' href='/stylesheets/form1.css' />
 
-<!-- <div id="form1"> -->
-<form id="#form1">
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label">Text</label>
-    <div class="col-10">
-      <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-search-input" class="col-2 col-form-label">Search</label>
-    <div class="col-10">
-      <input class="form-control" type="search" value="How do I shoot web" id="example-search-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-email-input" class="col-2 col-form-label">Email</label>
-    <div class="col-10">
-      <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-url-input" class="col-2 col-form-label">URL</label>
-    <div class="col-10">
-      <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
-    <div class="col-10">
-      <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-password-input" class="col-2 col-form-label">Password</label>
-    <div class="col-10">
-      <input class="form-control" type="password" value="hunter2" id="example-password-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-number-input" class="col-2 col-form-label">Number</label>
-    <div class="col-10">
-      <input class="form-control" type="number" value="42" id="example-number-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-datetime-local-input" class="col-2 col-form-label">Date and time</label>
-    <div class="col-10">
-      <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-date-input" class="col-2 col-form-label">Date</label>
-    <div class="col-10">
-      <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-month-input" class="col-2 col-form-label">Month</label>
-    <div class="col-10">
-      <input class="form-control" type="month" value="2011-08" id="example-month-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-week-input" class="col-2 col-form-label">Week</label>
-    <div class="col-10">
-      <input class="form-control" type="week" value="2011-W33" id="example-week-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-time-input" class="col-2 col-form-label">Time</label>
-    <div class="col-10">
-      <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-color-input" class="col-2 col-form-label">Color</label>
-    <div class="col-10">
-      <input class="form-control" type="color" value="#563d7c" id="example-color-input">
-    </div>
-  </div>
-</form>
-<!-- </div> -->
+
+<script>
+window.onload = () => {
+    $(document).ready(() => {
+        $('#form2').hide();
+        $('#checkbox').change(function()
+        {
+          if ($(this).is(':checked')) {
+            checked = true;
+            $('#form2').show('');
+            $('#form2-none').hide();
+          } else {
+            checked = false;
+            $('#form2').hide();
+            $('#form2-none').show();
+          };
+        });
+    })
+}
+</script>
+
+<div id="all">
+    {{#if error}}
+        {{#each error}}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{msg}}
+            </div>
+        {{/each}}
+    {{/if}}
+    <h3>Secondary Account Holder Information</h3>
+    
+    <form action="/form2" method="post" id="form2">
+        <table id="table1">
+          <tr>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Jojo Jayjay" value="{{info.secondaryFirstName}}" name="secondaryFirstName" type="text" id="secondaryFirstName" class="form-control">
+                    <label for="secondaryFirstName">First Name</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Coolguy" value="{{info.secondaryMiddleName}}" name="secondaryMiddleName" type="text" id="secondaryMiddleName" class="form-control">
+                    <label for="secondaryMiddleName">Middle Name</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Brown" value="{{info.secondaryLastName}}" name="secondaryLastName" type="text" id="secondaryLastName" class="form-control">
+                    <label for="secondaryLastName">Last Name</label>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="123 456 789" value="{{info.secondaryTin}}" name="secondaryTin" type="text" id="secondaryTin" class="form-control">
+                    <label for="secondaryTin">TIN No.</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="123 456 789" value="{{info.secondarySSS}}" name="secondarySSS" type="text" id="secondarySSS" class="form-control">
+                    <label for="secondarySSS">GSIS/SSS</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="12/06/1994" value="{{info.secondaryDateOfBirth}}" name="secondaryDateOfBirth" type="text" id="secondaryDateOfBirth" class="form-control">
+                    <label for="secondaryDateOfBirth">Date of Birth</label>
+                </div>
+            </td>
+          </tr>
+          <tr class="special-tr">
+            <td colspan="2" class="form-input">
+                <div class="radio-options">
+                    <div class="radio-label">Gender: </div>
+                    <div class="form-group radio-items">
+                        {{#if radio.male}}
+                        <input name="secondaryGender" type="radio" id="male" value="male" checked="checked">
+                        {{else}}
+                        <input name="secondaryGender" type="radio" id="male" value="male">
+                        {{/if}}
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="form-group radio-items">
+                        {{#if radio.female}}
+                        <input name="secondaryGender" type="radio" id="female" value="female" checked="checked">
+                        {{else}}
+                        <input name="secondaryGender" type="radio" id="female" value="female">
+                        {{/if}}
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="form-group radio-items">
+                        {{#if radio.other}}
+                        <input name="secondaryGender" type="radio" id="other" value="other" checked="checked">
+                        {{else}}
+                        <input name="secondaryGender" type="radio" id="other" value="other">
+                        {{/if}}
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <div class="radio-label">Civil Status:</div>
+                    <select name="secondaryCivilStatus">
+                        {{#if radio.single}}
+                        <option value="single" selected>Single</option>
+                        {{else}}
+                        <option value="single">Single</option>
+                        {{/if}}
+                        {{#if radio.married}}
+                        <option value="married" selected>Married</option>
+                        {{else}}
+                        <option value="married">Married</option>
+                        {{/if}}
+                        {{#if radio.widowed}}
+                        <option value="widowed" selected>Widowed</option>
+                        {{else}}
+                        <option value="widowed">Widowed</option>
+                        {{/if}}
+                    </select>
+                </div>
+            </td>
+          </tr>
+          <tr><br>
+              <td class="form-input"></td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.secondaryNumberAndStreet}}" name="secondaryNumberAndStreet" type="text" id="secondaryNumberAndStreet" class="form-control">
+                      <label for="secondaryNumberAndStreet">Number and Street</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="My Mom's Office Building" value="{{info.secondarySubdivision}}" name="secondarySubdivision" type="text" id="secondarySubdivision" class="form-control">
+                      <label for="secondarySubdivision">Building / Subdivision</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Quezon City" value="{{info.secondaryCity}}" name="secondaryCity" type="text" id="secondaryCity" class="form-control">
+                      <label for="secondaryCity">City</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Metro Manila" value="{{info.secondaryProvince}}" name="secondaryProvince" type="text" id="secondaryProvince" class="form-control">
+                      <label for="secondaryProvince">Province</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123456" value="{{info.secondaryZipcode}}" name="secondaryZipcode" type="text" id="secondaryZipcode" class="form-control">
+                      <label for="secondaryZipcode">Postal / Zip Code</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2"class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Downtown" value="{{info.secondaryTownAndDistrict}}" name="secondaryTownAndDistrict" type="text" id="secondaryTownAndDistrict" class="form-control">
+                      <label for="secondaryTownAndDistrict">Town and District</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+              </td>
+          </tr>
+          <tr class="special-tr">
+              <td colspan="3" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Birth: </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.birthCountryPH}}
+                          <input name="secondaryBirthCountry" type="radio" value="Philippines" checked="checked">
+                          {{else}}
+                          <input name="secondaryBirthCountry" type="radio" value="Philippines">
+                          {{/if}}
+                          <label for="birthCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.birthCountryUSA}}
+                          <input name="secondaryBirthCountry" type="radio" value="United States of America" checked="checked">
+                          {{else}}
+                          <input name="secondaryBirthCountry" type="radio" value="United States of America">
+                          {{/if}}
+                          <label for="birthCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.birthCountryOther}}
+                          <input name="secondaryBirthCountry" type="radio" value="Other" checked="checked">
+                          {{else}}
+                          <input name="secondaryBirthCountry" type="radio" value="Other">
+                          {{/if}}
+                          <label for="birthCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr class="special-tr">
+              <td colspan="3" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Residency: </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.residenceCountryPH}}
+                          <input name="secondaryResidenceCountry" type="radio" value="Philippines" checked="checked">
+                          {{else}}
+                          <input name="secondaryResidenceCountry" type="radio" value="Philippines">
+                          {{/if}}
+                          <label for="residenceCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.residenceCountryUSA}}
+                          <input name="secondaryResidenceCountry" type="radio" value="United States of America" checked="checked">
+                          {{else}}
+                          <input name="secondaryResidenceCountry" type="radio" value="United States of America">
+                          {{/if}}
+                          <label for="residenceCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.residenceCountryOther}}
+                          <input name="secondaryResidenceCountry" type="radio" value="Other" checked="checked">
+                          {{else}}
+                          <input name="secondaryResidenceCountry" type="radio" value="Other">
+                          {{/if}}
+                          <label for="residenceCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr class="special-tr">
+              <td colspan="3" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Citizenship: </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.citizenshipCountryPH}}
+                          <input name="secondaryCitizenshipCountry" type="radio" value="Philippines" checked="checked">
+                          {{else}}
+                          <input name="secondaryCitizenshipCountry" type="radio" value="Philippines">
+                          {{/if}}
+                          <label for="citizenshipCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.citizenshipCountryUSA}}
+                          <input name="secondaryCitizenshipCountry" type="radio" value="United States of America" checked="checked">
+                          {{else}}
+                          <input name="secondaryCitizenshipCountry" type="radio" value="United States of America">
+                          {{/if}}
+                          <label for="citizenshipCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.citizenshipCountryOther}}
+                          <input name="secondaryCitizenshipCountry" type="radio" value="Other" checked="checked">
+                          {{else}}
+                          <input name="secondaryCitizenshipCountry" type="radio" value="Other">
+                          {{/if}}
+                          <label for="citizenshipCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="+(country code)(area code)(number); ex. +6329999999" value="{{info.secondaryTelephone}}" name="secondaryTelephone" type="text" id="secondaryTelephone" class="form-control">
+                      <label for="secondaryTelephone">Telephone Number</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="+(country code)(area code)(number); ex. +639179999999" value="{{info.secondaryMobile}}" name="secondaryMobile" type="text" id="secondaryMobile" class="form-control">
+                      <label for="secondaryMobile">Mobile Number</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="juan@gmail.com" value="{{info.secondaryEmail}}" name="secondaryEmail" type="text" id="secondaryEmail" class="form-control">
+                      <label for="secondaryEmail">Email Address</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="3" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.secondaryOccupation}}" name="secondaryOccupation" type="text" id="secondaryOccupation" class="form-control">
+                      <label for="secondaryOccupation">Occupation</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.secondaryEmployer}}" name="secondaryEmployer" type="text" id="secondaryEmployer" class="form-control">
+                      <label for="secondaryEmployer">Employer/Company</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="+(country code) (area code) (number); ex. +639179999999" value="{{info.secondaryBusinessContact}}" name="secondaryBusinessContact" type="text" id="secondaryBusinessContact" class="form-control">
+                      <label for="secondaryContact">Business Number</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <span class="radio-label">Status:</span>
+                  <select name="secondaryEmploymentStatus">
+                      {{#if radio.employed}}
+                      <option value="Employed" selected>Employed</option>
+                      {{else}}
+                      <option value="Employed">Employed</option>
+                      {{/if}}
+                      {{#if radio.unemployed}}
+                      <option value="Unemployed" selected>Unemployed</option>
+                      {{else}}
+                      <option value="Unemployed">Unemployed</option>
+                      {{/if}}
+                      {{#if radio.ofw}}
+                      <option value="OFW" selected>OFW</option>
+                      {{else}}
+                      <option value="OFW">OFW</option>
+                      {{/if}}
+                      {{#if radio.selfemployed}}
+                      <option value="Self-Employed" selected>Self-Employed</option>
+                      {{else}}
+                      <option value="Self-Employed">Self-Employed</option>
+                      {{/if}}
+                      {{#if radio.student}}
+                      <option value="Student" selected>Student</option>
+                      {{else}}
+                      <option value="Student">Student</option>
+                      {{/if}}
+                      {{#if radio.retired}}
+                      <option value="Retired" selected>Retired</option>
+                      {{else}}
+                      <option value="Retired">Retired</option>
+                      {{/if}}
+                      {{#if radio.homemaker}}
+                      <option value="Homemaker" selected>Homemaker</option>
+                      {{else}}
+                      <option value="Homemaker">Homemaker</option>
+                      {{/if}}
+                      {{#if radio.otherEmployment}}
+                      <option value="Other" selected>Other</option>
+                      {{else}}
+                      <option value="Other">Other</option>
+                      {{/if}}
+                  </select>
+              </td>
+              <td class="form-input">
+                  <span class="radio-label">Business Type:</span>
+                  <select name="secondaryNatureOfBusiness">
+                      {{#if radio.agriaqua}}
+                      <option value="Agri/Aqua" selected>Agri/Aqua</option>
+                      {{else}}
+                      <option value="Agri/Aqua">Agri/Aqua</option>
+                      {{/if}}
+                      {{#if radio.consultancy}}
+                      <option value="Consultancy" selected>Consultancy</option>
+                      {{else}}
+                      <option value="Consultancy">Consultancy</option>
+                      {{/if}}
+                      {{#if radio.entertainment}}
+                      <option value="Entertainment" selected>Entertainment</option>
+                      {{else}}
+                      <option value="Entertainment">Entertainment</option>
+                      {{/if}}
+                      {{#if radio.finance}}
+                      <option value="Finance" selected>Finance</option>
+                      {{else}}
+                      <option value="Finance">Finance</option>
+                      {{/if}}
+                      {{#if radio.gov}}
+                      <option value="Government Service" selected>Government Service</option>
+                      {{else}}
+                      <option value="Government Service">Government Service</option>
+                      {{/if}}
+                      {{#if radio.mining}}
+                      <option value="Mining" selected>Mining</option>
+                      {{else}}
+                      <option value="Mining">Mining</option>
+                      {{/if}}
+                      {{#if radio.transportation}}
+                      <option value="Transportation" selected>Transportation</option>
+                      {{else}}
+                      <option value="Transportation">Transportation</option>
+                      {{/if}}
+                      {{#if radio.communication}}
+                      <option value="Communication" selected>Communication</option>
+                      {{else}}
+                      <option value="Communication">Communication</option>
+                      {{/if}}
+                      {{#if radio.banking}}
+                      <option value="Banking" selected>Banking</option>
+                      {{else}}
+                      <option value="Banking">Banking</option>
+                      {{/if}}
+                      {{#if radio.brokerage}}
+                      <option value="Brokerage" selected>Brokerage</option>
+                      {{else}}
+                      <option value="Brokerage">Brokerage</option>
+                      {{/if}}
+                      {{#if radio.education}}
+                      <option value="Education" selected>Education</option>
+                      {{else}}
+                      <option value="Education">Education</option>
+                      {{/if}}
+                      {{#if radio.food}}
+                      <option value="Food" selected>Food</option>
+                      {{else}}
+                      <option value="Food">Food</option>
+                      {{/if}}
+                      {{#if radio.manufacturing}}
+                      <option value="Manufacturing" selected>Manufacturing</option>
+                      {{else}}
+                      <option value="Manufacturing">Manufacturing</option>
+                      {{/if}}
+                      {{#if radio.medical}}
+                      <option value="Medical" selected>Medical</option>
+                      {{else}}
+                      <option value="Medical">Medical</option>
+                      {{/if}}
+                      {{#if radio.wholesale}}
+                      <option value="Wholesale/Retail" selected>Wholesale/Retail</option>
+                      {{else}}
+                      <option value="Wholesale/Retail">Wholesale/Retail</option>
+                      {{/if}}
+                      {{#if radio.utilities}}
+                      <option value="Utilities" selected>Utilities</option>
+                      {{else}}
+                      <option value="Utilities">Utilities</option>
+                      {{/if}}
+                      {{#if radio.otherNature}}
+                      <option value="Other" selected>Other</option>
+                      {{else}}
+                      <option value="Other">Other</option>
+                      {{/if}}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">&nbsp;</td>
+          </tr>
+          <tr>
+              <td class="form-input">&nbsp;</td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123ABC" value="{{info.secondaryBusinessNumberAndStreet}}" name="secondaryBusinessNumberAndStreet" type="text" id="secondaryBusinessNumberAndStreet" class="form-control">
+                      <label for="secondaryBusinessNumberAndStreet">Number and Street</label>
+                  </div>
+              </td>
+              <td colspan="2" class="form-input">
+                  <div class="md-form">
+                      <input placeholder="My Mom's Office Building" value="{{info.secondaryBusinessSubdivision}}" name="secondaryBusinessSubdivision" type="text" id="secondaryBusinessSubdivision" class="form-control">
+                      <label for="secondarySubdivision">Building / Subdivision</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Quezon City" value="{{info.secondaryBusinessCity}}" name="secondaryBusinessCity" type="text" id="secondaryBusinessCity" class="form-control">
+                      <label for="secondaryBusinessCity">City</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Metro Manila" value="{{info.secondaryBusinessProvince}}" name="secondaryBusinessProvince" type="text" id="secondaryBusinessProvince" class="form-control">
+                      <label for="secondaryBusinessProvince">Province</label>
+                  </div>
+              </td>
+              <td class="form-input">
+                  <div class="md-form">
+                      <input placeholder="123456" value="{{info.secondaryBusinessZipcode}}" name="secondaryBusinessZipcode" type="text" id="secondaryBusinessZipcode" class="form-control">
+                      <label for="secondaryBusinessZipcode">Postal / Zip Code</label>
+                  </div>
+              </td>
+          </tr>
+          <tr class="special-tr">
+              <td colspan="2"class="form-input">
+                  <div class="md-form">
+                      <input placeholder="Downtown" value="{{info.secondaryBusinessTownAndDistrict}}" name="secondaryBusinessTownAndDistrict" type="text" id="secondaryBusinessTownAndDistrict" class="form-control">
+                      <label for="secondaryBusinessTownAndDistrict">Town and District</label>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" class="form-input">
+                  <div class="radio-options">
+                      <div class="radio-label">Country of Business: </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.businessCountryPH}}
+                          <input name="secondaryBusinessCountry" type="radio" value="Philippines" checked="checked">
+                          {{else}}
+                          <input name="secondaryBusinessCountry" type="radio" value="Philippines">
+                          {{/if}}
+                          <label for="businessCountryPH">Philippines</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.businessCountryUSA}}
+                          <input name="secondaryBusinessCountry" type="radio" value="United States of America" checked="checked">
+                          {{else}}
+                          <input name="secondaryBusinessCountry" type="radio" value="United States of America">
+                          {{/if}}
+                          <label for="businessCountryUSA">USA</label>
+                      </div>
+                      <div class="form-group radio-items">
+                          {{#if radio.businessCountryOther}}
+                          <input name="secondaryBusinessCountry" type="radio" value="Other" checked="checked">
+                          {{else}}
+                          <input name="secondaryBusinessCountry" type="radio" value="Other">
+                          {{/if}}
+                          <label for="businessCountryOther">Other</label>
+                      </div>
+                  </div>
+              </td>
+              <td></td>
+          </tr>
+          <tr>
+
+          </tr>
+        </table>
+        <input type="submit" id="form2-submit" value="Submit">
+    </form>
+</div>
