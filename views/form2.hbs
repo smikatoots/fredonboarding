@@ -4,19 +4,19 @@
 <script>
 window.onload = () => {
     $(document).ready(() => {
-        $('#form2').hide();
-        $('#checkbox').change(function()
-        {
-          if ($(this).is(':checked')) {
-            checked = true;
-            $('#form2').show('');
-            $('#form2-none').hide();
-          } else {
-            checked = false;
-            $('#form2').hide();
-            $('#form2-none').show();
-          };
-        });
+        // $('#form2').hide();
+        // $('#checkbox').change(function()
+        // {
+        //   if ($(this).is(':checked')) {
+        //     checked = true;
+        //     $('#form2').show('');
+        //     $('#form2-none').hide();
+        //   } else {
+        //     checked = false;
+        //     $('#form2').hide();
+        //     $('#form2-none').show();
+        //   };
+        // });
     })
 }
 </script>
@@ -32,7 +32,52 @@ window.onload = () => {
         {{/each}}
     {{/if}}
     <h3>Secondary Account Holder Information</h3>
-    
+        <!-- <div id="table1-blank">
+            <input placeholder="Jojo Jayjay" value="" name="secondaryFirstName" type="text" id="secondaryFirstName" class="form-control">
+            <input placeholder="Coolguy" value="" name="secondaryMiddleName" type="text" id="secondaryMiddleName" class="form-control">
+            <input placeholder="Brown" value="" name="secondaryLastName" type="text" id="secondaryLastName" class="form-control">
+            <input placeholder="123 456 789" value="" name="secondaryTin" type="text" id="secondaryTin" class="form-control">
+            <input placeholder="123 456 789" value="" name="secondarySSS" type="text" id="secondarySSS" class="form-control">
+            <input placeholder="12/06/1994" value="" name="secondaryDateOfBirth" type="text" id="secondaryDateOfBirth" class="form-control">
+            <select name="secondaryCivilStatus">
+                <option value=""></option>
+            </select>
+            <input name="secondaryGender" type="radio" id="other" value="" checked="checked">
+            <input value="" name="secondaryNumberAndStreet" type="text" id="secondaryNumberAndStreet" class="form-control">
+            <input value="" name="secondarySubdivision" type="text" id="secondarySubdivision" class="form-control">
+            <input value="" name="secondaryCity" type="text" id="secondaryCity" class="form-control">
+            <input value="" name="secondaryProvince" type="text" id="secondaryProvince" class="form-control">
+            <input value="" name="secondaryZipcode" type="text" id="secondaryZipcode" class="form-control">
+            <input value="" name="secondaryTownAndDistrict" type="text" id="secondaryTownAndDistrict" class="form-control">
+            <input name="secondaryBirthCountry" type="radio" value="Other" checked="checked">
+            <input name="secondaryResidenceCountry" type="radio" value="Other" checked="checked">
+            <input name="secondaryCitizenshipCountry" type="radio" value="" checked="checked">
+            <input value="" name="secondaryTelephone" type="text" id="secondaryTelephone" class="form-control">
+            <input value="" name="secondaryMobile" type="text" id="secondaryMobile" class="form-control">
+            <input value="" name="secondaryEmail" type="text" id="secondaryEmail" class="form-control">
+            <input value="" name="secondaryOccupation" type="text" id="secondaryOccupation" class="form-control">
+            <input value="" name="secondaryEmployer" type="text" id="secondaryEmployer" class="form-control">
+            <input value="" name="secondaryBusinessContact" type="text" id="secondaryBusinessContact" class="form-control">
+            <select name="secondaryEmploymentStatus">
+                <option value="" selected></option>
+            </select>
+            <select name="secondaryNatureOfBusiness">
+                <option value="" selected></option>
+            </select>
+            <input value="" name="secondaryBusinessNumberAndStreet" type="text" id="secondaryBusinessNumberAndStreet" class="form-control">
+            <input value="" name="secondaryBusinessSubdivision" type="text" id="secondaryBusinessSubdivision" class="form-control">
+            <input placeholder="Quezon City" value="" name="secondaryBusinessCity" type="text" id="secondaryBusinessCity" class="form-control">
+            <input placeholder="Metro Manila" value="" name="secondaryBusinessProvince" type="text" id="secondaryBusinessProvince" class="form-control">
+            <input placeholder="123456" value="" name="secondaryBusinessZipcode" type="text" id="secondaryBusinessZipcode" class="form-control">
+            <input placeholder="Downtown" value="" name="secondaryBusinessTownAndDistrict" type="text" id="secondaryBusinessTownAndDistrict" class="form-control">
+            <input name="secondaryBusinessCountry" type="radio" value="" checked="checked">
+        </div>
+        <div>
+            <button class="back-button" type="button" id="verify-edit"><a href="/form1">Back</a></button>
+            <input type="submit" class="form-button" id="form2-submit" value="Submit">
+        </div>
+    </form> --> -->
+
     <form action="/form2" method="post" id="form2">
         <table id="table1">
           <tr>
@@ -538,6 +583,10 @@ window.onload = () => {
 
           </tr>
         </table>
-        <input type="submit" id="form2-submit" value="Submit">
+        <div>
+            <button class="back-button" type="button" id="verify-edit"><a href="/form1">Back</a></button>
+            <input type="submit" class="form-button" id="form2-submit" value="Submit">
+        </div>
     </form>
+
 </div>

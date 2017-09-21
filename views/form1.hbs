@@ -3,6 +3,54 @@
 <script>
 window.onload = () => {
     $(document).ready(() => {
+        $('.yes-blank').hide();
+        $('#primaryOfficerListed').change(function()
+        {
+          if ($(this).is(':checked')) {
+            $(this).siblings('.yes-blank').show()
+          } else {
+            $(this).siblings('.yes-blank').val("")
+            $(this).siblings('.yes-blank').hide()
+          };
+        });
+        $('#primaryOfficerBroker').change(function()
+        {
+          if ($(this).is(':checked')) {
+            $(this).siblings('.yes-blank').show()
+          } else {
+            $(this).siblings('.yes-blank').val("")
+            $(this).siblings('.yes-blank').hide()
+          };
+        });
+        $('#primaryShareholderBroker').change(function()
+        {
+          if ($(this).is(':checked')) {
+            $(this).siblings('.yes-blank').show()
+          } else {
+            $(this).siblings('.yes-blank').val("")
+            $(this).siblings('.yes-blank').hide()
+          };
+        });
+        $('#primaryExistingAccount').change(function()
+        {
+          if ($(this).is(':checked')) {
+            $(this).siblings('.yes-blank').show()
+          } else {
+            $(this).siblings('.yes-blank').val("")
+            $(this).siblings('.yes-blank').hide()
+          };
+        });
+        $('#primaryAnotherAccount').change(function()
+        {
+          if ($(this).is(':checked')) {
+            $(this).siblings('.yes-blank').show()
+          } else {
+            $(this).siblings('.yes-blank').val("")
+            $(this).siblings('.yes-blank').hide()
+          };
+        });
+
+
     })
 }
 </script>
@@ -532,10 +580,274 @@ window.onload = () => {
               <td></td>
           </tr>
           <tr>
-
+              <td colspan="1" class="form-input">
+                  <div class="radio-label">Are you a director/corporate officer of a PSE-listed company?</div>
+                  <div class="form-group radio-items">
+                      <br>
+                      <input class="yes-option" id="primaryOfficerListed"  type="checkbox" value="Yes"> Yes
+                      <input name="primaryOfficerListed" placeholder="Please specify" class="yes-blank" type="text" value="{{primaryOfficerListed}}">
+                  </div>
+              </td>
+              <td colspan="1" class="form-input">
+                  <div class="radio-label">Are you a director/corporate officer or employee of another broker/dealer?</div>
+                  <div class="form-group radio-items">
+                      <br>
+                      <div>
+                          <input class="yes-option" id="primaryOfficerBroker" type="checkbox" value="Yes"> Yes
+                          <input name="primaryOfficerBroker" placeholder="Please specify company" class="yes-blank" type="text" value="{{primaryOfficerBroker}}">
+                      </div>
+                  </div>
+              </td>
+              <td colspan="1" class="form-input">
+                  <div class="radio-label">Are you a shareholder of another broker/dealer?</div>
+                  <div class="form-group radio-items">
+                      <br>
+                      <input class="yes-option" id="primaryShareholderBroker" type="checkbox" value="Yes"> Yes
+                      <input name="primaryShareholderBroker" placeholder="Please specify company" class="yes-blank" type="text" value="{{primaryShareholderBroker}}">
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="radio-label">&nbsp;<br>&nbsp;</div>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="1" class="form-input">
+                  <div class="radio-label">Do you have an existing COL Account?</div>
+                  <div class="form-group radio-items">
+                      <br>
+                      <input class="yes-option" id="primaryExistingAccount"  type="checkbox" value="Yes"> Yes
+                      <input name="primaryExistingAccount" placeholder="Please list account numbers" class="yes-blank" type="text" value="{{primaryExistingAccount}}">
+                  </div>
+              </td>
+              <td colspan="1" class="form-input">
+                  <div class="radio-label">Do you have an account with another broker?</div>
+                  <div class="form-group radio-items">
+                      <br>
+                      <div>
+                          <input class="yes-option" id="primaryAnotherAccount" type="checkbox" value="Yes"> Yes
+                          <input name="primaryAnotherAccount" placeholder="Please list broker number" class="yes-blank" type="text" value="{{primaryAnotherAccount}}">
+                      </div>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="radio-label">&nbsp;<br>&nbsp;</div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <span class="radio-label">Assets:</span>
+                  <select name="primaryAssets">
+                      {{#if radio.asset500k}}
+                      <option value="< 500,000" selected>Less than 500,000</option>
+                      {{else}}
+                      <option value="< 500,000">Less than 500,000/option>
+                      {{/if}}
+                      {{#if radio.asset1m}}
+                      <option value="< 1 million" selected>Less than 1 million</option>
+                      {{else}}
+                      <option value="< 1 million">Less than 1 million/option>
+                      {{/if}}
+                      {{#if radio.asset5m}}
+                      <option value="< 5 million" selected>Less than 5 million</option>
+                      {{else}}
+                      <option value="< 5 million">Less than 5 million/option>
+                      {{/if}}
+                      {{#if radio.asset10m}}
+                      <option value="< 10 million" selected>Less than 10 million</option>
+                      {{else}}
+                      <option value="< 10 million">Less than 10 million/option>
+                      {{/if}}
+                      {{#if radio.asset10mplus}}
+                      <option value="> 10 million" selected>Greater than 10 million</option>
+                      {{else}}
+                      <option value="> 10 million">Greater than 10 millioin</option>
+                      {{/if}}
+                  </select>
+              </td>
+              <td class="form-input">
+                  <span class="radio-label">Net Worth (assets - liabilities):</span>
+                  <select name="primaryNetWorth">
+                      {{#if radio.net500k}}
+                      <option value="< 500,000" selected>Less than 500,000</option>
+                      {{else}}
+                      <option value="< 500,000">Less than 500,000/option>
+                      {{/if}}
+                      {{#if radio.net1m}}
+                      <option value="< 1 million" selected>Less than 1 million</option>
+                      {{else}}
+                      <option value="< 1 million">Less than 1 million/option>
+                      {{/if}}
+                      {{#if radio.net5m}}
+                      <option value="< 5 million" selected>Less than 5 million</option>
+                      {{else}}
+                      <option value="< 5 million">Less than 5 million/option>
+                      {{/if}}
+                      {{#if radio.net10m}}
+                      <option value="< 10 million" selected>Less than 10 million</option>
+                      {{else}}
+                      <option value="< 10 million">Less than 10 million/option>
+                      {{/if}}
+                      {{#if radio.net10mplus}}
+                      <option value="> 10 million" selected>Greater than 10 million</option>
+                      {{else}}
+                      <option value="> 10 million">Greater than 10 millioin</option>
+                      {{/if}}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="radio-label">&nbsp;<br>&nbsp;</div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <span class="radio-label">Annual Income:</span>
+                  <select name="primaryAnnualIncome">
+                      {{#if radio.income200k}}
+                      <option value="< 200,000" selected>Less than 200,000</option>
+                      {{else}}
+                      <option value="< 200,000">Less than 200,000</option>
+                      {{/if}}
+                      {{#if radio.income500k}}
+                      <option value="< 500,000" selected>Less than 500,000</option>
+                      {{else}}
+                      <option value="< 500,000">Less than 500,000</option>
+                      {{/if}}
+                      {{#if radio.income1m}}
+                      <option value="< 1 million" selected>Less than 1 million</option>
+                      {{else}}
+                      <option value="< 1 million">Less than 1 million</option>
+                      {{/if}}
+                      {{#if radio.income1mplus}}
+                      <option value="> 1 million" selected>Greater than 1 million</option>
+                      {{else}}
+                      <option value="> 1 million">Greater than 1 million</option>
+                      {{/if}}
+                  </select>
+              </td>
+              <td class="form-input">
+                  <span class="radio-label">Sources of Income:</span>
+                  <select name="primarySourcesOfIncome">
+                      {{#if radio.sourceSalary}}
+                      <option value="salary" selected>Salary</option>
+                      {{else}}
+                      <option value="salary">Salary</option>
+                      {{/if}}
+                      {{#if radio.sourceRetirement}}
+                      <option value="retirement" selected>Retirement/Pension</option>
+                      {{else}}
+                      <option value="retirement">Retirement/Pension</option>
+                      {{/if}}
+                      {{#if radio.sourceBusiness}}
+                      <option value="business" selected>Business</option>
+                      {{else}}
+                      <option value="business">Business</option>
+                      {{/if}}
+                      {{#if radio.sourceInheritance}}
+                      <option value="family" selected>Family/Remittance</option>
+                      {{else}}
+                      <option value="family">Family/Remittance</option>
+                      {{/if}}
+                      {{#if radio.sourceInvestments}}
+                      <option value="investments" selected>Investments</option>
+                      {{else}}
+                      <option value="investments">Investments</option>
+                      {{/if}}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="radio-label">&nbsp;<br>&nbsp;</div>
+              </td>
+          </tr>
+          <tr>
+              <td class="form-input">
+                  <span class="radio-label">Annual Income:</span>
+                  <select name="primaryExperience">
+                      {{#if radio.none}}
+                      <option value="None" selected>None</option>
+                      {{else}}
+                      <option value="None">None</option>
+                      {{/if}}
+                      {{#if radio.limited}}
+                      <option value="Limited" selected>Limited</option>
+                      {{else}}
+                      <option value="Limited">Limited</option>
+                      {{/if}}
+                      {{#if radio.good}}
+                      <option value="Good" selected>Good</option>
+                      {{else}}
+                      <option value="Good">Good</option>
+                      {{/if}}
+                      {{#if radio.extensive}}
+                      <option value="Extensive" selected>Extensive</option>
+                      {{else}}
+                      <option value="Extensive">Extensive</option>
+                      {{/if}}
+                  </select>
+              </td>
+              <td class="form-input">
+                  <span class="radio-label">Sources of Income:</span>
+                  <select name="primaryObjectives">
+                      {{#if radio.preservation}}
+                      <option value="Capital Preservation" selected>Capital Preservation</option>
+                      {{else}}
+                      <option value="Capital Preservation">Capital Preservation</option>
+                      {{/if}}
+                      {{#if radio.longterm}}
+                      <option value="Long Term Investment" selected>Long Term Investment</option>
+                      {{else}}
+                      <option value="Long Term Investment">Long Term Investment</option>
+                      {{/if}}
+                      {{#if radio.growth}}
+                      <option value="Growth" selected>Growth</option>
+                      {{else}}
+                      <option value="Growth">Growth</option>
+                      {{/if}}
+                      {{#if radio.speculation}}
+                      <option value="Speculation" selected>Speculation</option>
+                      {{else}}
+                      <option value="Speculation">Speculation</option>
+                      {{/if}}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="radio-label">&nbsp;<br>&nbsp;</div>
+              </td>
+          </tr>
+          <tr>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="BPI" value="{{info.bankName}}" name="bankName" type="text" id="bankName" class="form-control">
+                    <label for="bankName">Bank Name</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Coolguy" value="{{info.bankBranch}}" name="bankBranch" type="text" id="bankBranch" class="form-control">
+                    <label for="bankBranch">Bank Branch</label>
+                </div>
+            </td>
+            <td class="form-input">
+                <div class="md-form">
+                    <input placeholder="Brown" value="{{info.bankNumber}}" name="bankNumber" type="text" id="bankNumber" class="form-control">
+                    <label for="bankNumber">Bank Number</label>
+                </div>
+            </td>
           </tr>
         </table>
-        <input type="submit" id="form1-submit" value="Submit">
+        <div>
+            <button class="back-button" type="button" id="verify-edit"><a href="/form0">Back</a></button>
+            <input type="submit"  class="form-button" id="form1-submit" value="Submit">
+        </div>
     </form>
-    
+
 </div>

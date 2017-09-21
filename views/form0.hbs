@@ -1,0 +1,42 @@
+<link rel='stylesheet' href='/stylesheets/form1.css' />
+
+<script>
+window.onload = () => {
+    $(document).ready(() => {
+    })
+}
+</script>
+
+<div id="all">
+    {{#if error}}
+        {{#each error}}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{msg}}
+            </div>
+        {{/each}}
+    {{/if}}
+    <h3>Type of Account</h3>
+    <form action="/form0" method="post" id="form0">
+        <div><select name="accountType">
+            {{#if radio.individual}}
+            <option value="individual" selected >Individual</option>
+            {{else}}
+            <option value="individual">Individual</option>
+            {{/if}}
+            {{#if radio.joint}}
+            <option value="joint" selected >Joint</option>
+            {{else}}
+            <option value="joint">Joint</option>
+            {{/if}}
+            {{#if radio.itf}}
+            <option value="itf" selected>ITF</option>
+            {{else}}
+            <option value="itf">ITF</option>
+            {{/if}}
+        </select></div>
+        <input type="submit" class="form-button" id="form0-submit" value="Submit">
+    </form>
+
+</div>

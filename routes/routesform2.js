@@ -171,7 +171,7 @@ router.post('/form2', function(req, res, next) {
   console.log('radio object', radioObj);
   if (errors) {
       console.log(errors);
-      res.render('form1', {
+      res.render('form2', {
         user: user,
         error: errors,
         info: infoObj,

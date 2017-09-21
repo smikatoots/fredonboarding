@@ -31,11 +31,12 @@ router.use(function(req, res, next){
 });
 
 // PRIVATE ROUTES
-
+var form0 = require('./routesform0.js')
 var form1 = require('./routesform1.js')
 var form2 = require('./routesform2.js')
 var verify = require('./routesverify.js')
 
+router.use('/', form0);
 router.use('/', form1);
 router.use('/', form2);
 router.use('/', verify);

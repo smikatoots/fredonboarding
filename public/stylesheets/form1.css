@@ -10,7 +10,7 @@ body {
     align-items: center;
 }
 
-#form1, #form2 {
+#form1, #form2, #form0 {
     /*background-color: grey;*/
     width: 60%;
     display: flex;
@@ -45,7 +45,7 @@ body {
     vertical-align: top;
 }
 
-#form1-submit, #form2-submit-none, #form2-submit {
+.form-button, .back-button {
   width: 200px;
   font-size: 15px;
   font-weight: 900;
@@ -62,7 +62,7 @@ body {
   cursor: pointer;
   outline: none;
 }
-#form1-submit:hover, #form2-submit-none:hover, #form2-submit:hover {
+.form-button:hover, .back-button:hover {
   background-color: #09519C;
   box-shadow: 0px 15px 20px rgba(192, 192, 192, 0.4);
   color: #fff;
@@ -84,4 +84,11 @@ body {
 }
 a {
     text-decoration: none;
+}
+
+#table1-blank{
+    display: none;
+}
+td {
+    vertical-align: top;
 }

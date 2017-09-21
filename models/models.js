@@ -3,10 +3,25 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 var UsersSchema = schema({
+    accountType: {
+        type: String
+    },
     username: {
         type: String
     },
     password: {
+        type: String
+    },
+    bankName: {
+        type: String
+    },
+    bankBranch: {
+        type: String
+    },
+    bankNumber: {
+        type: String
+    },
+    howDidYouLearn: {
         type: String
     },
     primaryFirstName: {
@@ -105,6 +120,39 @@ var UsersSchema = schema({
     primaryPreferredAddress: {
         type: String
     },
+    primaryOfficerListed: {
+        type: String
+    },
+    primaryOfficerBroker: {
+        type: String
+    },
+    primaryShareholderBroker: {
+        type: String
+    },
+    primaryExistingAccount: {
+        type: String
+    },
+    primaryAnotherAccount: {
+        type: String
+    },
+    primaryAssets: {
+        type: String
+    },
+    primaryNetWorth: {
+        type: String
+    },
+    primaryAnnualIncome: {
+        type: String
+    },
+    primarySourcesOfIncome: {
+        type: String
+    },
+    primaryExperience: {
+        type: String
+    },
+    primaryObjectives: {
+        type: String
+    },
 
 
     secondaryFirstName: {
@@ -201,6 +249,39 @@ var UsersSchema = schema({
         type: String
     },
     secondaryEmail: {
+        type: String
+    },
+    secondaryOfficerListed: {
+        type: String
+    },
+    secondaryOfficerBroker: {
+        type: String
+    },
+    secondaryShareholderBroker: {
+        type: String
+    },
+    secondaryExistingAccount: {
+        type: String
+    },
+    secondaryAnotherAccount: {
+        type: String
+    },
+    secondaryAssets: {
+        type: String
+    },
+    secondaryNetWorth: {
+        type: String
+    },
+    secondaryAnnualIncome: {
+        type: String
+    },
+    secondarySourcesOfIncome: {
+        type: String
+    },
+    secondaryExperience: {
+        type: String
+    },
+    secondaryObjectives: {
         type: String
     },
 

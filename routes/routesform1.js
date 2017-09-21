@@ -56,6 +56,33 @@ function createRadioObj(user) {
         wholesale: user.primaryNatureOfBusiness === 'Wholesale/Retail',
         utilities: user.primaryNatureOfBusiness === 'Utilities',
         otherNature: user.primaryNatureOfBusiness === 'Other',
+        asset500k: user.primaryAssets === '< 500,000',
+        asset1m: user.primaryAssets === '< 1 million',
+        asset5m: user.primaryAssets === '< 5 million',
+        asset10m: user.primaryAssets === '< 10 million',
+        asset10mplus: user.primaryAssets === '> 10 million',
+        net500k: user.primaryNetWorth === '< 500,000',
+        net1m: user.primaryNetWorth === '< 1 million',
+        net5m: user.primaryNetWorth === '< 5 million',
+        net10m: user.primaryNetWorth === '< 10 million',
+        net10mplus: user.primaryNetWorth === '> 10 million',
+        income200k: user.primaryAnnualIncome === '< 200,000',
+        income500k: user.primaryAnnualIncome === '< 500,000',
+        income1m: user.primaryAnnualIncome === '< 1 million',
+        income1mplus: user.primaryAnnualIncome === '> 1 million',
+        sourceSalary: user.primarySourcesOfIncome === 'salary',
+        sourceRetirement: user.primarySourcesOfIncome === 'retirement',
+        sourceBusiness: user.primarySourcesOfIncome === 'business',
+        sourceInheritance: user.primarySourcesOfIncome === 'family',
+        sourceInvestments: user.primarySourcesOfIncome === 'investments',
+        none: user.primaryExperience === 'None',
+        limited: user.primaryExperience === 'Limited',
+        good: user.primaryExperience === 'Good',
+        extensive: user.primaryExperience === 'Extensive',
+        preservation: user.primaryObjectives === 'Capital Preservation',
+        longterm: user.primaryObjectives === 'Long Term Investment',
+        growth: user.primaryObjectives === 'Growth',
+        speculation: user.primaryObjectives === 'Speculation',
     };
     return radioObj
 }
@@ -67,7 +94,7 @@ router.get('/form1', function(req, res, next) {
       res.render('form1', {
           user: user,
           info: user,
-          radio: radioObj
+          radio: radioObj,
       });
   })
 });
@@ -93,10 +120,17 @@ router.post('/form1', function(req, res, next) {
   req.checkBody('primaryBusinessProvince', 'Business province must not be empty').notEmpty();
   req.checkBody('primaryBusinessZipcode', 'Business zipcode must not be empty').notEmpty();
   req.checkBody('primaryBusinessTownAndDistrict', 'Business town and district must not be empty').notEmpty();
+  req.checkBody('bankName', 'Bank name must not be empty').notEmpty();
+  req.checkBody('bankNumber', 'Bank number must not be empty').notEmpty();
+  req.checkBody('bankBranch', 'Bank branch must not be empty').notEmpty();
 
   var errors = req.validationErrors();
   var user = req.user;
   var infoObj = {
+      bankName: req.body.bankName,
+      bankBranch: req.body.bankBranch,
+      bankNumber: req.body.bankNumber,
+      howDidYouLearn: req.body.howDidYouLearn,
       primaryFirstName: req.body.primaryFirstName,
       primaryMiddleName: req.body.primaryMiddleName,
       primaryLastName: req.body.primaryLastName,
@@ -129,6 +163,17 @@ router.post('/form1', function(req, res, next) {
       primaryBusinessTownAndDistrict: req.body.primaryBusinessTownAndDistrict,
       primaryBusinessCountry: req.body.primaryBusinessCountry,
       primaryPreferredAddress: req.body.primaryPreferredAddress,
+      primaryOfficerListed: req.body.primaryOfficerListed,
+      primaryOfficerBroker: req.body.primaryOfficerBroker,
+      primaryShareholderBroker: req.body.primaryShareholderBroker,
+      primaryExistingAccount: req.body.primaryExistingAccount,
+      primaryAnotherAccount: req.body.primaryAnotherAccount,
+      primaryAssets: req.body.primaryAssets,
+      primaryNetWorth: req.body.primaryNetWorth,
+      primaryAnnualIncome: req.body.primaryAnnualIncome,
+      primarySourcesOfIncome: req.body.primarySourcesOfIncome,
+      primaryExperience: req.body.primaryExperience,
+      primaryObjectives: req.body.primaryObjectives
   };
   var radioObj = createRadioObj(user);
   console.log('radio object', radioObj);
@@ -145,7 +190,11 @@ router.post('/form1', function(req, res, next) {
           if(err) {
             return res.send('Error updating information:', err);
           } else {
-            res.redirect('verify');
+            if (user.accountType === "joint") {
+                res.redirect('form2');
+            } else {
+                res.redirect('verify')
+            }
           }
       })
   }
