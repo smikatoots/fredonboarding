@@ -182,7 +182,7 @@ router.post('/form2', function(req, res, next) {
           if(err) {
             return res.send('Error updating information:', err);
           } else {
-            res.redirect('form2');
+            res.redirect('verify');
           }
       })
   }
