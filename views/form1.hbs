@@ -4,53 +4,28 @@
 window.onload = () => {
     $(document).ready(() => {
         $('.yes-blank').hide();
-        $('#primaryOfficerListed').change(function()
-        {
-          if ($(this).is(':checked')) {
-            $(this).siblings('.yes-blank').show()
-          } else {
-            $(this).siblings('.yes-blank').val("")
-            $(this).siblings('.yes-blank').hide()
-          };
-        });
-        $('#primaryOfficerBroker').change(function()
-        {
-          if ($(this).is(':checked')) {
-            $(this).siblings('.yes-blank').show()
-          } else {
-            $(this).siblings('.yes-blank').val("")
-            $(this).siblings('.yes-blank').hide()
-          };
-        });
-        $('#primaryShareholderBroker').change(function()
-        {
-          if ($(this).is(':checked')) {
-            $(this).siblings('.yes-blank').show()
-          } else {
-            $(this).siblings('.yes-blank').val("")
-            $(this).siblings('.yes-blank').hide()
-          };
-        });
-        $('#primaryExistingAccount').change(function()
-        {
-          if ($(this).is(':checked')) {
-            $(this).siblings('.yes-blank').show()
-          } else {
-            $(this).siblings('.yes-blank').val("")
-            $(this).siblings('.yes-blank').hide()
-          };
-        });
-        $('#primaryAnotherAccount').change(function()
-        {
-          if ($(this).is(':checked')) {
-            $(this).siblings('.yes-blank').show()
-          } else {
-            $(this).siblings('.yes-blank').val("")
-            $(this).siblings('.yes-blank').hide()
-          };
-        });
-
-
+        var fieldsArray = ['#primaryOfficerListed',
+        '#primaryOfficerBroker',
+        '#primaryShareholderBroker',
+        '#primaryExistingAccount',
+        '#primaryAnotherAccount']
+        console.log(fieldsArray);
+        for (var i = 0; i < fieldsArray.length; i++) {
+            console.log(i, fieldsArray[i]);
+            if ($(fieldsArray[i]).siblings('.yes-blank').val() !== "") {
+                $(fieldsArray[i]).attr('checked', 'checked');
+                $(fieldsArray[i]).siblings('.yes-blank').show()
+            }
+            $(fieldsArray[i]).change(function()
+            {
+              if ($(this).is(':checked')) {
+                  $(this).siblings('.yes-blank').show()
+              } else {
+                $(this).siblings('.yes-blank').val("")
+                $(this).siblings('.yes-blank').hide()
+              };
+            });
+        }
     })
 }
 </script>
@@ -585,7 +560,7 @@ window.onload = () => {
                   <div class="form-group radio-items">
                       <br>
                       <input class="yes-option" id="primaryOfficerListed"  type="checkbox" value="Yes"> Yes
-                      <input name="primaryOfficerListed" placeholder="Please specify" class="yes-blank" type="text" value="{{primaryOfficerListed}}">
+                      <input name="primaryOfficerListed" placeholder="Please specify" class="yes-blank" type="text" value="{{info.primaryOfficerListed}}">
                   </div>
               </td>
               <td colspan="1" class="form-input">
@@ -594,7 +569,7 @@ window.onload = () => {
                       <br>
                       <div>
                           <input class="yes-option" id="primaryOfficerBroker" type="checkbox" value="Yes"> Yes
-                          <input name="primaryOfficerBroker" placeholder="Please specify company" class="yes-blank" type="text" value="{{primaryOfficerBroker}}">
+                          <input name="primaryOfficerBroker" placeholder="Please specify company" class="yes-blank" type="text" value="{{info.primaryOfficerBroker}}">
                       </div>
                   </div>
               </td>
@@ -603,7 +578,7 @@ window.onload = () => {
                   <div class="form-group radio-items">
                       <br>
                       <input class="yes-option" id="primaryShareholderBroker" type="checkbox" value="Yes"> Yes
-                      <input name="primaryShareholderBroker" placeholder="Please specify company" class="yes-blank" type="text" value="{{primaryShareholderBroker}}">
+                      <input name="primaryShareholderBroker" placeholder="Please specify company" class="yes-blank" type="text" value="{{info.primaryShareholderBroker}}">
                   </div>
               </td>
           </tr>
@@ -618,7 +593,7 @@ window.onload = () => {
                   <div class="form-group radio-items">
                       <br>
                       <input class="yes-option" id="primaryExistingAccount"  type="checkbox" value="Yes"> Yes
-                      <input name="primaryExistingAccount" placeholder="Please list account numbers" class="yes-blank" type="text" value="{{primaryExistingAccount}}">
+                      <input name="primaryExistingAccount" placeholder="Please list account numbers" class="yes-blank" type="text" value="{{info.primaryExistingAccount}}">
                   </div>
               </td>
               <td colspan="1" class="form-input">
@@ -627,7 +602,7 @@ window.onload = () => {
                       <br>
                       <div>
                           <input class="yes-option" id="primaryAnotherAccount" type="checkbox" value="Yes"> Yes
-                          <input name="primaryAnotherAccount" placeholder="Please list broker number" class="yes-blank" type="text" value="{{primaryAnotherAccount}}">
+                          <input name="primaryAnotherAccount" placeholder="Please list broker number" class="yes-blank" type="text" value="{{info.primaryAnotherAccount}}">
                       </div>
                   </div>
               </td>
