@@ -4,6 +4,10 @@ var models = require('../models/models');
 var bcrypt = require('bcrypt')
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
+var nodemailer = require('nodemailer');
+var path = require('path');
+
+
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -37,15 +41,43 @@ module.exports = function(passport) {
           username: req.body.username,
           password: hash
         });
+        console.log("GOT IN HERE");
         u.save(function(err, user) {
+          console.log('SAVED USER');
           if (err) {
             console.log(err);
             res.status(500).redirect('/register');
             return;
           }
           console.log('Registered user:', user);
-          res.redirect('/form1');
+          var htmlMessage = 'test';
+          const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASS
+              }
+          });
+          const mailOptions = {
+            from: process.env.EMAIL, // sender address
+            to: user.username, // list of receivers
+            subject: 'This is a test email from the app!', // Subject line
+            html: htmlMessage, // plaintext body alt for html
+            attachments:[
+              {
+                filename: 'COL Form Signup.png',
+                path: 'public/images/form3.png'
+              }
+            ]
+          };
+          return transporter.sendMail(mailOptions).then((error, info) => {
+              if (error) {
+                  return console.log('Error sending message:', error);
+              }
+              console.log('Message sent: %s', info.messageId);
+          });
         });
+      res.redirect('/form1');
     })
   });
 
