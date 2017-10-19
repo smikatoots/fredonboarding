@@ -27,7 +27,8 @@ router.get('/verify', function(req, res, next) {
     .then((user) => {
         console.log('USERS', user);
         res.render('verify', {
-            user: user
+            user: user,
+            joint: user.accountType === 'joint'
         })
     })
 })
@@ -45,20 +46,24 @@ router.post('/verify', function(req, res, next) {
   })
   .then((user) => {
       var htmlMessage = `<h4>Hi ${user.primaryFirstName}!</h4>
-      <p>Thank you for signing up for your COL Account.<br><br>
+      <p>Thank you for entering your information for your COL Account.<br><br>
       Please do the following: <br>
-      1) Save all your documents to your files. <br>
-      2) Print out the "[insert name of document here]" and affix your signature in the appropriate fields. <br>
-      3) Scan that document and send it back to freddiereyes@gmail.com <br>><br>
-      We look forward to receiving your documents!</p
-      <h4>Best, <br> Freddie Reyes</h4>`
+      1) Download all the documents attached to this email. <br>
+      2) Print out "COL Form 2" and "COL Form 3", fill out the missing fields, sign and scan.<br>
+      3) Scan all documents.<br>
+      4) Email all three (3) pages to ${process.env.MAIN_EMAIL}.<br><br>
+      We look forward to receiving your documents!</p><br>
+      If you have any questions, please send an email using the address below. <br><br>
+      <h4>Best, <br>
+      Freddie Reyes <br>
+      ${process.env.MAIN_EMAIL}</h4>`
       var doc = new pdf({
           margin: 10
       });
       var buffers = [];
       doc.on('data', buffers.push.bind(buffers));
       doc.on('end', () => {
-          var pdfData = Buffer.concat(buffers);
+          var form1 = Buffer.concat(buffers);
           const mailTransport = nodemailer.createTransport({
               service: 'gmail',
               auth: {
@@ -69,12 +74,22 @@ router.post('/verify', function(req, res, next) {
           const mailOptions = {
                 from: process.env.EMAIL, // sender address
                 to: user.username, // list of receivers
-                subject: 'This is a test email from the app!', // Subject line
+                subject: 'Your COL Forms', // Subject line
                 html: htmlMessage, // plaintext body alt for html
-                attachments:[{
-                    filename: "COL Document.pdf",
-                    content: pdfData
-                }]
+                attachments:[
+                  {
+                    filename: "COL Form 1 (Completed).pdf",
+                    content: form1
+                  },
+                  {
+                    filename: "COL Form 2 (To Be Completed).pdf",
+                    path: 'public/images/form2.pdf'
+                  },
+                  {
+                    filename: "COL Form 3 (To Be Completed).pdf",
+                    path: 'public/images/form3.pdf'
+                  },
+                ]
           };
           return mailTransport.sendMail(mailOptions).then(() => {
               console.log('Email sent!');
@@ -190,6 +205,14 @@ router.post('/verify', function(req, res, next) {
       doc.text(`${user.secondaryBusinessZipcode}`, secondaryBaseWidth + 170, jobHeight + (jobHeightIncrement*13));
       doc.text(`${user.secondaryBusinessTownAndDistrict}`, secondaryBaseWidth, jobHeight + (jobHeightIncrement*14));
       doc.text(`${user.secondaryBusinessCountry}`, secondaryBaseWidth, jobHeight + (jobHeightIncrement*15));
+
+      // doc.addPage();
+
+      // doc.image('public/images/form2-clean.png', 0, 0, {
+      //     width: 610
+      // });
+
+      // doc.text(`THIS IS TEST TEXT`, secondaryBaseWidth, jobHeight + (jobHeightIncrement*1));
 
       doc.end();
       res.redirect('/form3');

@@ -19,11 +19,13 @@ td {
 }
 
 .result-label {
-    width: 30%;
+    width: 20%;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .result {
-    width: 70%;
+    /*width: 70%;*/
 }
 
 #button-holder {

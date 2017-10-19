@@ -172,6 +172,7 @@ router.post('/form2', function(req, res, next) {
   var errors = req.validationErrors();
   var user = req.user;
   var infoObj = {
+    secondaryEmail: req.body.secondaryEmail,
     secondaryFirstName: req.body.secondaryFirstName,
     secondaryMiddleName: req.body.secondaryMiddleName,
     secondaryLastName: req.body.secondaryLastName,

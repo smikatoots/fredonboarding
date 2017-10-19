@@ -23,6 +23,9 @@ module.exports = function(passport) {
   router.post('/signup', function(req, res) {
     // validation step
     req.checkBody('username', 'Email must be a valid email address').isEmail();
+    req.checkBody('primaryFirstName', 'First name must not be empty').notEmpty();
+    req.checkBody('primaryLastName', 'Last name must not be empty').notEmpty();
+
     var errors = req.validationErrors();
     if (errors) {
         console.log("ERRORS", errors);
@@ -39,18 +42,32 @@ module.exports = function(passport) {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         var u = new models.User({
           username: req.body.username,
-          password: hash
+          password: hash,
+          primaryFirstName: req.body.primaryFirstName,
+          primaryLastName: req.body.primaryLastName,
         });
-        console.log("GOT IN HERE");
         u.save(function(err, user) {
-          console.log('SAVED USER');
           if (err) {
             console.log(err);
             res.status(500).redirect('/register');
             return;
           }
           console.log('Registered user:', user);
-          var htmlMessage = 'test';
+          var htmlMessage = `<h4>Hi ${user.primaryFirstName}!</h4>
+          <p>Thank you for signing up for your COL Account.<br><br>
+          Here is your information for your account:<br>
+          <b>Full Name:</b> ${req.body.primaryFirstName} ${req.body.primaryLastName}<br>
+          <b>Username:</b> ${req.body.username} <br>
+          <b>Password:</b> ${req.body.password} <br><br>
+          To continue your application you may do any of the following: <br>
+          <ul>
+          <li>Download, print and fill out the forms attached. After filling them out, scan them and email to ${process.env.MAIN_EMAIL}</li>
+          <li>Click on <a href="http://fredonboarding.herokuapp.com">this link </a>to continue with your online application using your email and password.</li>
+          </ul><br>
+          Please email Freddie Reyes with any questions. We look forward to receiving your documents!</p>
+          <h4>Best, <br>
+          Freddie Reyes <br>
+          ${process.env.MAIN_EMAIL}</h4>`
           const transporter = nodemailer.createTransport({
               service: 'gmail',
               auth: {
@@ -61,12 +78,12 @@ module.exports = function(passport) {
           const mailOptions = {
             from: process.env.EMAIL, // sender address
             to: user.username, // list of receivers
-            subject: 'This is a test email from the app!', // Subject line
+            subject: 'Your Citisec Online Application', // Subject line
             html: htmlMessage, // plaintext body alt for html
             attachments:[
               {
-                filename: 'COL Form Signup.png',
-                path: 'public/images/form3.png'
+                filename: 'COL Form.pdf',
+                path: 'public/images/full-form.pdf'
               }
             ]
           };
@@ -77,8 +94,12 @@ module.exports = function(passport) {
               console.log('Message sent: %s', info.messageId);
           });
         });
-      res.redirect('/form1');
+      res.redirect('/confirm-signup');
     })
+  });
+
+  router.get('/confirm-signup', function(req, res) {
+    res.render('confirm-signup');
   });
 
   // GET Login page
@@ -88,7 +109,7 @@ module.exports = function(passport) {
 
   // POST Login page
   router.post('/login', passport.authenticate('local',{
-    successRedirect: '/form1',
+    successRedirect: '/form0',
     failureRedirect: '/login'
   }));
 

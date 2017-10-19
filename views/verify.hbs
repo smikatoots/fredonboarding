@@ -9,7 +9,10 @@ window.onload = () => {
                 url: '/verify',
                 method: 'POST',
                 success: function(res) {
-                    $("#all").html("<div> Please check your email for further instructions!</div>")
+                    $("#all").html(
+                      `<div style="text-align: center"> Please wait while we send you your forms. <br>
+                      Check your email in a few minutes for further instructions.</div>`
+                    )
                     console.log(res);
                     console.log("Success from verify post route!");
                 },
@@ -30,48 +33,112 @@ window.onload = () => {
     </h3>
     <table id="results-table">
       <tr>
+          <td class="result-label">Type of Account</td>
+          <td colspan="2" class="result">{{user.accountType}}</td>
+      </tr>
+      <tr>
+          <td class="result-label"></td>
+          <td style="font-weight: bold; text-decoration: underline;" class="result">Primary</td>
+          {{#if joint}}<td style="font-weight: bold; text-decoration: underline;" class="result">Secondary</td>{{/if}}
+      </tr>
+      <tr>
           <td class="result-label">Full Name</td>
           <td class="result">{{user.primaryFirstName}} {{user.primaryMiddleName}} {{user.primaryLastName}}</td>
+          {{#if joint}}<td class="result">{{user.primaryFirstName}} {{user.primaryMiddleName}} {{user.primaryLastName}}{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Email</td>
+          <td class="result">{{user.username}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryEmail}}{{/if}}
       </tr>
       <tr>
           <td class="result-label">TIN #</td>
           <td class="result">{{user.primaryTin}}</td>
+          {{#if joint}}<td class="result">{{user.primaryTin}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">SSS #</td>
           <td class="result">{{user.primarySSS}}</td>
+          {{#if joint}}<td class="result">{{user.secondarySSS}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Gender #</td>
           <td class="result">{{user.primaryGender}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryGender}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Date of Birth</td>
           <td class="result">{{user.primaryDateOfBirth}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryDateOfBirth}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Civil Status</td>
           <td class="result">{{user.primaryCivilStatus}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryCivilStatus}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Address</td>
-          <td class="result">{{user.primaryNumberAndStreet}} {{user.primarySubdivision}} {{user.primaryCityAndProvince}}, {{user.primaryZipcode}} {{user.primaryTownAndDistrict}}</td>
+          <td class="result">{{user.primaryNumberAndStreet}} {{user.primarySubdivision}} {{user.primaryCity}}, {{user.primaryProvince}}, {{user.primaryZipcode}} {{user.primaryTownAndDistrict}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryNumberAndStreet}} {{user.secondarySubdivision}} {{user.secondaryCity}}, {{user.secondaryProvince}}, {{user.secondaryZipcode}} {{user.secondaryTownAndDistrict}}</td>{{/if}}
       </tr>
       <tr>
-          <td class="result-label">Contact Number</td>
-          <td class="result">{{user.primaryContact}}
+          <td class="result-label">Telephone Number</td>
+          <td class="result">{{user.primaryTelephone}}
+          {{#if joint}}<td class="result">{{user.secondaryTelephone}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Mobile Number</td>
+          <td class="result">{{user.primaryMobile}}
+          {{#if joint}}<td class="result">{{user.secondaryMobile}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Country of Birth</td>
           <td class="result">{{user.primaryBirthCountry}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryBirthCountry}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Country of Residence</td>
           <td class="result">{{user.primaryResidenceCountry}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryResidenceCountry}}</td>{{/if}}
       </tr>
       <tr>
           <td class="result-label">Country of Citizenship</td>
           <td class="result">{{user.primaryCitizenshipCountry}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryCitizenshipCountry}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Occupation</td>
+          <td class="result">{{user.primaryOccupation}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryOccupation}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Employment Status</td>
+          <td class="result">{{user.primaryEmploymentStatus}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryEmploymentStatus}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Employer</td>
+          <td class="result">{{user.primaryEmployer}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryEmployer}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Nature of Business</td>
+          <td class="result">{{user.primaryNatureOfBusiness}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryNatureOfBusiness}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Business Contact</td>
+          <td class="result">{{user.primaryBusinessContact}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryBusinessContact}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Business Address</td>
+          <td class="result">{{user.primaryBusinessNumberAndStreet}} {{user.primaryBusinessSubdivision}} {{user.primaryBusinessCity}}, {{user.primaryBusinessProvince}}, {{user.primaryBusinessZipcode}} {{user.primaryBusinessTownAndDistrict}}</td>
+          {{#if joint}}<td class="result">{{user.secondaryBusinessNumberAndStreet}} {{user.secondaryBusinessSubdivision}} {{user.secondaryBusinessCity}}, {{user.secondaryBusinessProvince}}, {{user.secondaryBusinessZipcode}} {{user.secondaryBusinessTownAndDistrict}}</td>{{/if}}
+      </tr>
+      <tr>
+          <td class="result-label">Preferred Address</td>
+          <td colspan="2" class="result">{{user.primaryPreferredAddress}}</td>
       </tr>
     </table>
     <div id="button-holder">
