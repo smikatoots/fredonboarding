@@ -69,17 +69,18 @@ router.post('/verify', function(req, res, next) {
       doc.on('end', () => {
           var form1 = Buffer.concat(buffers);
           const mailTransport = nodemailer.createTransport({
-              service: 'gmail',
+              // service: 'gmail',
+              host: 'smtp.gmail.com',
               // host: 'smtp.colfinancial.com',
-              // port: 587,
-              // secure: false,
+              port: 587,
+              secure: false,
               auth: {
                  user: process.env.EMAIL,
                  pass: process.env.PASS
               }
           });
           const mailOptions = {
-                from: process.env.EMAIL, // sender address
+                from: '<Freddie Reyes, COL Financial> ' + process.env.EMAIL, // sender address
                 to: [user.username, process.env.MAIN_EMAIL],// list of receivers
                 subject: 'Your Citisec Online Financial Forms', // Subject line
                 html: htmlMessage, // plaintext body alt for html

@@ -6,9 +6,6 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var nodemailer = require('nodemailer');
 var path = require('path');
-
-
-
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(expressValidator());
@@ -38,68 +35,80 @@ module.exports = function(passport) {
           error: [{msg:'Passwords do not match. Please try again.'}]
       });
     }
-    var saltRounds = 10;
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-        var u = new models.User({
-          username: req.body.username,
-          password: hash,
-          primaryFirstName: req.body.primaryFirstName,
-          primaryLastName: req.body.primaryLastName,
-        });
-        u.save(function(err, user) {
-          if (err) {
-            console.log(err);
-            res.status(500).redirect('/register');
-            return;
-          }
-          console.log('Registered user:', user);
-          var htmlMessage = `<h4>Hi ${user.primaryFirstName}!</h4>
-          <p>Thank you for signing up for your COL Account.<br><br>
-          Here is your information for your account:<br>
-          <b>Full Name:</b> ${req.body.primaryFirstName} ${req.body.primaryLastName}<br>
-          <b>Username:</b> ${req.body.username} <br>
-          <b>Password:</b> ${req.body.password} <br><br>
-          To continue your application you may do any of the following: <br>
-          <ul>
-          <li>Download, print and fill out the forms attached. After filling them out, scan them and email to ${process.env.MAIN_EMAIL}</li>
-          <li>Click on <a href="http://fredonboarding.herokuapp.com">this link </a>to continue with your online application using your email and password.</li>
-          </ul><br>
-          Please email Freddie Reyes with any questions. We look forward to receiving your documents!</p>
-          <h4>Best, <br>
-          Freddie Reyes <br>
-          ${process.env.MAIN_EMAIL}</h4><br>
-          <p>2403B East Tower, <br>
-          Philippine Stock Exchange Center, <br>
-          Exchange Rd. Ortigas Center, <br>
-          Pasig City 1605 Philippines</p>
-          `
-          const transporter = nodemailer.createTransport({
-              service: 'gmail',
-              auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASS
+
+    User.find({username: req.body.username})
+    .exec((err, user) => {
+      if (user) {
+          console.log('User already exists. Please try again.')
+          return
+      } else if (err){
+          console.log('Error:', err);
+          return
+      } else {
+        var saltRounds = 10;
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+            var u = new models.User({
+              username: req.body.username,
+              password: hash,
+              primaryFirstName: req.body.primaryFirstName,
+              primaryLastName: req.body.primaryLastName,
+            });
+            u.save(function(err, user) {
+              if (err) {
+                console.log(err);
+                res.status(500).redirect('/register');
+                return;
               }
-          });
-          const mailOptions = {
-            from: process.env.EMAIL, // sender address
-            to: [user.username, process.env.MAIN_EMAIL], // list of receivers
-            subject: 'Your Citisec Online Financial Application', // Subject line
-            html: htmlMessage, // plaintext body alt for html
-            attachments:[
-              {
-                filename: 'COL Form.pdf',
-                path: 'public/images/full-form.pdf'
-              }
-            ]
-          };
-          return transporter.sendMail(mailOptions).then((error, info) => {
-              if (error) {
-                  return console.log('Error sending message:', error);
-              }
-              console.log('Message sent: %s', info.messageId);
-          });
-        });
-      res.redirect('/confirm-signup');
+              console.log('Registered user:', user);
+              var htmlMessage = `<h4>Hi ${user.primaryFirstName}!</h4>
+              <p>Thank you for signing up for your COL Account.<br><br>
+              Here is your information for your account:<br>
+              <b>Full Name:</b> ${req.body.primaryFirstName} ${req.body.primaryLastName}<br>
+              <b>Username:</b> ${req.body.username} <br>
+              <b>Password:</b> ${req.body.password} <br><br>
+              To continue your application you may do any of the following: <br>
+              <ul>
+              <li>Download, print and fill out the forms attached. After filling them out, scan them and email to ${process.env.MAIN_EMAIL}</li>
+              <li>Click on <a href="http://fredonboarding.herokuapp.com">this link </a>to continue with your online application using your email and password.</li>
+              </ul><br>
+              Please email Freddie Reyes with any questions. We look forward to receiving your documents!</p>
+              <h4>Best, <br>
+              Freddie Reyes <br>
+              ${process.env.MAIN_EMAIL}</h4><br>
+              <p>2403B East Tower, <br>
+              Philippine Stock Exchange Center, <br>
+              Exchange Rd. Ortigas Center, <br>
+              Pasig City 1605 Philippines</p>
+              `
+              const transporter = nodemailer.createTransport({
+                  service: 'gmail',
+                  auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASS
+                  }
+              });
+              const mailOptions = {
+                from: process.env.EMAIL, // sender address
+                to: [user.username, process.env.MAIN_EMAIL], // list of receivers
+                subject: 'Your Citisec Online Financial Application', // Subject line
+                html: htmlMessage, // plaintext body alt for html
+                attachments:[
+                  {
+                    filename: 'COL Form.pdf',
+                    path: 'public/images/full-form.pdf'
+                  }
+                ]
+              };
+              return transporter.sendMail(mailOptions).then((error, info) => {
+                  if (error) {
+                      return console.log('Error sending message:', error);
+                  }
+                  console.log('Message sent: %s', info.messageId);
+              });
+            });
+          res.redirect('/confirm-signup');
+        })
+      }
     })
   });
 
