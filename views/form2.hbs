@@ -4,29 +4,29 @@
 <script>
 window.onload = () => {
   $(document).ready(() => {
-      $('.yes-blank').hide();
-      var fieldsArray = ['#secondaryOfficerListed',
-      '#secondaryOfficerBroker',
-      '#secondaryShareholderBroker',
-      '#secondaryExistingAccount',
-      '#secondaryAnotherAccount']
-      console.log(fieldsArray);
-      for (var i = 0; i < fieldsArray.length; i++) {
-          console.log(i, fieldsArray[i]);
-          if ($(fieldsArray[i]).siblings('.yes-blank').val() !== "") {
-              $(fieldsArray[i]).attr('checked', 'checked');
-              $(fieldsArray[i]).siblings('.yes-blank').show()
-          }
-          $(fieldsArray[i]).change(function()
-          {
-            if ($(this).is(':checked')) {
-                $(this).siblings('.yes-blank').show()
-            } else {
-              $(this).siblings('.yes-blank').val("")
-              $(this).siblings('.yes-blank').hide()
-            };
-          });
-      }
+      // $('.yes-blank').hide();
+      // var fieldsArray = ['#secondaryOfficerListed',
+      // '#secondaryOfficerBroker',
+      // '#secondaryShareholderBroker',
+      // '#secondaryExistingAccount',
+      // '#secondaryAnotherAccount']
+      // console.log(fieldsArray);
+      // for (var i = 0; i < fieldsArray.length; i++) {
+      //     console.log(i, fieldsArray[i]);
+      //     if ($(fieldsArray[i]).siblings('.yes-blank').val() !== "") {
+      //         $(fieldsArray[i]).attr('checked', 'checked');
+      //         $(fieldsArray[i]).siblings('.yes-blank').show()
+      //     }
+      //     $(fieldsArray[i]).change(function()
+      //     {
+      //       if ($(this).is(':checked')) {
+      //           $(this).siblings('.yes-blank').show()
+      //       } else {
+      //         $(this).siblings('.yes-blank').val("")
+      //         $(this).siblings('.yes-blank').hide()
+      //       };
+      //     });
+      // }
   })
 }
 </script>
@@ -558,7 +558,7 @@ window.onload = () => {
           </td>
           <td></td>
       </tr>
-      <tr>
+      <!-- <tr>
           <td colspan="1" class="form-input">
               <div class="radio-label">Are you a director/corporate officer of a PSE-listed company?</div>
               <div class="form-group radio-items">
@@ -796,7 +796,7 @@ window.onload = () => {
                   {{/if}}
               </select>
           </td>
-      </tr>
+      </tr>-->
       <tr>
           <td>
               <div class="radio-label">&nbsp;<br>&nbsp;</div>

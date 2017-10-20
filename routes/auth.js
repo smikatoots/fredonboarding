@@ -67,7 +67,12 @@ module.exports = function(passport) {
           Please email Freddie Reyes with any questions. We look forward to receiving your documents!</p>
           <h4>Best, <br>
           Freddie Reyes <br>
-          ${process.env.MAIN_EMAIL}</h4>`
+          ${process.env.MAIN_EMAIL}</h4><br>
+          <p>2403B East Tower, <br>
+          Philippine Stock Exchange Center, <br>
+          Exchange Rd. Ortigas Center, <br>
+          Pasig City 1605 Philippines</p>
+          `
           const transporter = nodemailer.createTransport({
               service: 'gmail',
               auth: {
@@ -77,8 +82,8 @@ module.exports = function(passport) {
           });
           const mailOptions = {
             from: process.env.EMAIL, // sender address
-            to: user.username, // list of receivers
-            subject: 'Your Citisec Online Application', // Subject line
+            to: [user.username, process.env.MAIN_EMAIL], // list of receivers
+            subject: 'Your Citisec Online Financial Application', // Subject line
             html: htmlMessage, // plaintext body alt for html
             attachments:[
               {

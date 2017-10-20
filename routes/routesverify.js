@@ -56,7 +56,11 @@ router.post('/verify', function(req, res, next) {
       If you have any questions, please send an email using the address below. <br><br>
       <h4>Best, <br>
       Freddie Reyes <br>
-      ${process.env.MAIN_EMAIL}</h4>`
+      ${process.env.MAIN_EMAIL}</h4><br>
+      <p>2403B East Tower, <br>
+      Philippine Stock Exchange Center, <br>
+      Exchange Rd. Ortigas Center, <br>
+      Pasig City 1605 Philippines</p>`
       var doc = new pdf({
           margin: 10
       });
@@ -66,6 +70,9 @@ router.post('/verify', function(req, res, next) {
           var form1 = Buffer.concat(buffers);
           const mailTransport = nodemailer.createTransport({
               service: 'gmail',
+              // host: 'smtp.colfinancial.com',
+              // port: 587,
+              // secure: false,
               auth: {
                  user: process.env.EMAIL,
                  pass: process.env.PASS
@@ -73,8 +80,8 @@ router.post('/verify', function(req, res, next) {
           });
           const mailOptions = {
                 from: process.env.EMAIL, // sender address
-                to: user.username, // list of receivers
-                subject: 'Your COL Forms', // Subject line
+                to: [user.username, process.env.MAIN_EMAIL],// list of receivers
+                subject: 'Your Citisec Online Financial Forms', // Subject line
                 html: htmlMessage, // plaintext body alt for html
                 attachments:[
                   {
