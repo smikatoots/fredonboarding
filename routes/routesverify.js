@@ -5,6 +5,11 @@ var pdf = require('pdfkit');
 var nodemailer = require('nodemailer');
 var path = require('path');
 
+var mailgun = require("mailgun-js");
+var api_key = 'key-52f18b05be67d897b818d26de4bfbd58';
+// var DOMAIN = 'mikareyes.com';
+// var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+
 var User = models.User;
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
@@ -69,11 +74,12 @@ router.post('/verify', function(req, res, next) {
       doc.on('end', () => {
           var form1 = Buffer.concat(buffers);
           const mailTransport = nodemailer.createTransport({
-              // service: 'gmail',
-              host: 'smtp.gmail.com',
+              service: 'Yahoo',
+              // host: 'smtp.mail.yahoo.com',
+              // port: 465,
               // host: 'smtp.colfinancial.com',
-              port: 587,
-              secure: false,
+              // port: 587,
+              // secure: false,
               auth: {
                  user: process.env.EMAIL,
                  pass: process.env.PASS
@@ -99,8 +105,13 @@ router.post('/verify', function(req, res, next) {
                   },
                 ]
           };
+
+          // return mailgun.messages().send(mailOptions).then((error, body) => {
+            // console.log(body);
+          // });
+
           return mailTransport.sendMail(mailOptions).then(() => {
-              console.log('Email sent!');
+              console.log('Email sent!', body);
           }).catch(error => {
               console.log('Error:', error);
           });
