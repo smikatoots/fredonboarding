@@ -80,7 +80,7 @@ router.post('/verify', function(req, res, next) {
               }
           });
           const mailOptions = {
-                from: '<Freddie Reyes, COL Financial> ' + process.env.EMAIL, // sender address
+                from: 'Freddie Reyes from COL Financial <' + process.env.EMAIL + '>', // sender address
                 to: [user.username, process.env.MAIN_EMAIL],// list of receivers
                 subject: 'Your Citisec Online Financial Forms', // Subject line
                 html: htmlMessage, // plaintext body alt for html

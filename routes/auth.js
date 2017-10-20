@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var nodemailer = require('nodemailer');
 var path = require('path');
+var User = models.User;
+
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(expressValidator());
@@ -40,7 +42,9 @@ module.exports = function(passport) {
     .exec((err, user) => {
       if (user) {
           console.log('User already exists. Please try again.')
-          return
+          return res.render('signup', {
+            error: [{msg: 'The email address is already in use. Please try again.'}]
+          })
       } else if (err){
           console.log('Error:', err);
           return
@@ -81,14 +85,18 @@ module.exports = function(passport) {
               Pasig City 1605 Philippines</p>
               `
               const transporter = nodemailer.createTransport({
-                  service: 'gmail',
+                // service: 'gmail',
+                host: 'smtp.gmail.com',
+                // host: 'smtp.colfinancial.com',
+                port: 587,
+                secure: false,
                   auth: {
                     user: process.env.EMAIL,
                     pass: process.env.PASS
                   }
               });
               const mailOptions = {
-                from: process.env.EMAIL, // sender address
+                from: 'Freddie Reyes from COL Financial <' + process.env.EMAIL + '>', // sender address
                 to: [user.username, process.env.MAIN_EMAIL], // list of receivers
                 subject: 'Your Citisec Online Financial Application', // Subject line
                 html: htmlMessage, // plaintext body alt for html
