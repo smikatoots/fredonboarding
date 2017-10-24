@@ -40,7 +40,7 @@ module.exports = function(passport) {
 
     User.find({username: req.body.username})
     .exec((err, user) => {
-      if (user) {
+      if (user[0] !== undefined) {
           console.log('User already exists. Please try again.')
           return res.render('signup', {
             error: [{msg: 'The email address is already in use. Please try again.'}]

@@ -7,8 +7,8 @@ var path = require('path');
 
 var mailgun = require("mailgun-js");
 var api_key = 'key-52f18b05be67d897b818d26de4bfbd58';
-// var DOMAIN = 'mikareyes.com';
-// var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+var domain = 'mikareyes.com';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var User = models.User;
 var expressValidator = require('express-validator');
@@ -86,8 +86,8 @@ router.post('/verify', function(req, res, next) {
               }
           });
           const mailOptions = {
-                from: 'Freddie Reyes from COL Financial <' + process.env.EMAIL + '>', // sender address
-                to: [user.username, process.env.MAIN_EMAIL],// list of receivers
+                from: 'Freddie Reyes from COL Financial <freddiereyes@gmail.com>', // sender address
+                to: [user.username],// list of receivers
                 subject: 'Your Citisec Online Financial Forms', // Subject line
                 html: htmlMessage, // plaintext body alt for html
                 attachments:[
@@ -106,15 +106,13 @@ router.post('/verify', function(req, res, next) {
                 ]
           };
 
-          // return mailgun.messages().send(mailOptions).then((error, body) => {
-            // console.log(body);
-          // });
-
-          return mailTransport.sendMail(mailOptions).then(() => {
-              console.log('Email sent!', body);
-          }).catch(error => {
-              console.log('Error:', error);
-          });
+          return mailgun.messages().send(mailOptions, function(err, body) {
+            if (err) {
+                console.log('Error:', error);
+            } else {
+                console.log('Email sent via mailgun', body);
+            }
+          })
       });
 
       // Form Background
