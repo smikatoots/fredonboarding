@@ -4,10 +4,11 @@ var models = require('../models/models');
 var pdf = require('pdfkit');
 var nodemailer = require('nodemailer');
 var path = require('path');
+var fs = require('fs');
 
 var mailgun = require("mailgun-js");
-var api_key = 'key-52f18b05be67d897b818d26de4bfbd58';
-var domain = 'mikareyes.com';
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.DOMAIN;
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var User = models.User;
@@ -73,44 +74,50 @@ router.post('/verify', function(req, res, next) {
       doc.on('data', buffers.push.bind(buffers));
       doc.on('end', () => {
           var form1 = Buffer.concat(buffers);
-          const mailTransport = nodemailer.createTransport({
-              service: 'Yahoo',
-              // host: 'smtp.mail.yahoo.com',
-              // port: 465,
-              // host: 'smtp.colfinancial.com',
-              // port: 587,
-              // secure: false,
-              auth: {
-                 user: process.env.EMAIL,
-                 pass: process.env.PASS
-              }
-          });
+          // const mailTransport = nodemailer.createTransport({
+          //     service: 'Yahoo',
+          //     // host: 'smtp.mail.yahoo.com',
+          //     // port: 465,
+          //     // host: 'smtp.colfinancial.com',
+          //     // port: 587,
+          //     // secure: false,
+          //     auth: {
+          //        user: process.env.EMAIL,
+          //        pass: process.env.PASS
+          //     }
+          // });
           const mailOptions = {
                 from: 'Freddie Reyes from COL Financial <freddiereyes@gmail.com>', // sender address
                 to: [user.username],// list of receivers
                 subject: 'Your Citisec Online Financial Forms', // Subject line
                 html: htmlMessage, // plaintext body alt for html
-                attachments:[
-                  {
-                    filename: "COL Form 1 (Completed).pdf",
-                    content: form1
-                  },
-                  {
-                    filename: "COL Form 2 (To Be Completed).pdf",
-                    path: 'public/images/form2.pdf'
-                  },
-                  {
-                    filename: "COL Form 3 (To Be Completed).pdf",
-                    path: 'public/images/form3.pdf'
-                  },
+                // attachment:[
+                //   {
+                //     filename: "COL Form 1 (Completed).pdf",
+                //     fileContent: form1
+                //   },
+                //   {
+                //     filename: "COL Form 2 (To Be Completed).pdf",
+                //     filepath: 'public/images/form2.pdf'
+                //   },
+                //   {
+                //     filename: "COL Form 3 (To Be Completed).pdf",
+                //     filepath: 'public/images/form3.pdf'
+                //   },
+                // ]
+                attachment: [
+                  new mailgun.Attachment({data: form1, filename: 'COL Form 1 (Completed).pdf'}),
+                  new mailgun.Attachment({data: fs.readFileSync(path.resolve(__dirname, '../public/images/form2.pdf')), filename: 'COL Form 2 (To Be Completed).pdf'}),
+                  new mailgun.Attachment({data: fs.readFileSync(path.resolve(__dirname, '../public/images/form3.pdf')), filename: 'COL Form 3 (To Be Completed).pdf'}),
                 ]
           };
 
           return mailgun.messages().send(mailOptions, function(err, body) {
             if (err) {
-                console.log('Error:', error);
+                console.log('Error:', err);
             } else {
-                console.log('Email sent via mailgun', body);
+              console.log(mailOptions);
+              console.log('Email sent via mailgun', body);
             }
           })
       });
