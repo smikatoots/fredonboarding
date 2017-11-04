@@ -129,10 +129,22 @@ module.exports = function(passport) {
     res.render('login');
   });
 
+  // GET Login error page
+  router.get('/loginerror', function(req, res) {
+    res.render('login', {
+      error: 'Invalid username or password. Please try again.'
+    });
+  });
+
   // POST Login page
   router.post('/login', passport.authenticate('local',{
     successRedirect: '/form0',
-    failureRedirect: '/login'
+    failureRedirect: '/loginerror'
+  }));
+
+  router.post('/loginerror', passport.authenticate('local',{
+    successRedirect: '/form0',
+    failureRedirect: '/loginerror'
   }));
 
   // GET Logout page
