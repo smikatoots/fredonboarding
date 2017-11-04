@@ -7,10 +7,16 @@ var expressValidator = require('express-validator');
 var nodemailer = require('nodemailer');
 var path = require('path');
 var User = models.User;
+var fs = require('fs');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(expressValidator());
+
+var mailgun = require("mailgun-js");
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.DOMAIN;
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 module.exports = function(passport) {
 
@@ -84,35 +90,23 @@ module.exports = function(passport) {
               Exchange Rd. Ortigas Center, <br>
               Pasig City 1605 Philippines</p>
               `
-              const transporter = nodemailer.createTransport({
-                // service: 'gmail',
-                host: 'smtp.gmail.com',
-                // host: 'smtp.colfinancial.com',
-                port: 587,
-                secure: false,
-                  auth: {
-                    user: process.env.EMAIL,
-                    pass: process.env.PASS
-                  }
-              });
               const mailOptions = {
-                from: 'Freddie Reyes from COL Financial <' + process.env.EMAIL + '>', // sender address
-                to: [user.username, process.env.MAIN_EMAIL], // list of receivers
+                from: 'Freddie Reyes from COL Financial <' + process.env.MAIN_EMAIL + '>', // sender address
+                to: [user.username], // list of receivers
                 subject: 'Your Citisec Online Financial Application', // Subject line
                 html: htmlMessage, // plaintext body alt for html
-                attachments:[
-                  {
-                    filename: 'COL Form.pdf',
-                    path: 'public/images/full-form.pdf'
-                  }
+                attachment: [
+                  new mailgun.Attachment({data: fs.readFileSync(path.resolve(__dirname, '../public/images/full-form.pdf')), filename: 'COL Form.pdf'}),
                 ]
               };
-              return transporter.sendMail(mailOptions).then((error, info) => {
-                  if (error) {
-                      return console.log('Error sending message:', error);
-                  }
-                  console.log('Message sent: %s', info.messageId);
-              });
+              return mailgun.messages().send(mailOptions, function(err, body) {
+                if (err) {
+                    console.log('Error:', err);
+                } else {
+                  console.log(mailOptions);
+                  console.log('Email sent via mailgun', body);
+                }
+              })
             });
           res.redirect('/confirm-signup');
         })
